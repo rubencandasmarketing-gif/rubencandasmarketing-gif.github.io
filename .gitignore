@@ -1,0 +1,30 @@
+# === Archivos del sistema operativo ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# === Editores e IDEs ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === Archivos temporales / logs ===
+*.log
+*.tmp
+*.bak
