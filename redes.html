@@ -59,7 +59,24 @@ body::before{
 .nav-links a:hover{opacity:1;color:var(--teal)}
 .nav-cta{background:var(--teal);color:var(--ink)!important;padding:9px 16px;border-radius:100px;opacity:1!important}
 .nav-cta:hover{background:var(--teal-soft)}
-@media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+/* --- Menú móvil (hamburguesa) --- */
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:40px;padding:0;background:transparent;border:0;cursor:pointer;border-radius:10px}
+.nav-toggle:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.nav-toggle-bar{display:block;width:24px;height:2px;margin:0 auto;background:var(--paper);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav.scrolled .nav-toggle-bar{background:var(--ink)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile{display:none}
+@media(max-width:760px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-mobile{position:fixed;top:70px;left:14px;right:14px;z-index:100;flex-direction:column;gap:6px;padding:14px;background:var(--paper);border:1px solid rgba(16,31,28,.06);border-radius:16px;box-shadow:0 18px 50px rgba(16,31,28,.22)}
+  .nav-mobile:not([hidden]){display:flex}
+  .nav-mobile a{color:var(--ink);text-decoration:none;font-weight:600;font-size:16px;padding:12px 14px;border-radius:10px}
+  .nav-mobile a:hover,.nav-mobile a:focus-visible{background:var(--teal-soft);color:var(--ink);outline:none}
+  .nav-mobile .nav-cta{background:var(--teal);color:var(--ink)!important;text-align:center;margin-top:4px}
+}
 
 /* ---------- HERO ---------- */
 .hero{position:relative;min-height:100vh;background:var(--ink);color:var(--paper);display:flex;align-items:center;overflow:hidden}
@@ -249,6 +266,17 @@ footer .brand-logo{height:30px;width:93px;background:var(--paper)}
     <a href="sobre-mi.html">¿Y este quién es?</a>
     <a href="#contacto" class="nav-cta">Hablamos</a>
   </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobile">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+  <div class="nav-mobile" id="navMobile" hidden>
+    <a href="redes.html">Gestión de RRSS</a>
+    <a href="formacion.html">Charlas y Talleres</a>
+    <a href="sobre-mi.html">¿Y este quién es?</a>
+    <a href="#contacto" class="nav-cta">Hablamos</a>
+  </div>
 </nav>
 
 <header class="hero" id="hero">
@@ -352,6 +380,17 @@ const nav=document.getElementById('nav');
 addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60)});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+(function(){
+  var t=document.getElementById('navToggle'),m=document.getElementById('navMobile');
+  if(!t||!m)return;
+  function openMenu(){m.hidden=false;t.setAttribute('aria-expanded','true');t.setAttribute('aria-label','Cerrar menú');}
+  function closeMenu(){m.hidden=true;t.setAttribute('aria-expanded','false');t.setAttribute('aria-label','Abrir menú');}
+  t.addEventListener('click',function(){t.getAttribute('aria-expanded')==='true'?closeMenu():openMenu();});
+  m.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});
+  document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.key==='Esc')&&t.getAttribute('aria-expanded')==='true'){closeMenu();t.focus();}});
+})();
 </script>
 </body>
 </html>
