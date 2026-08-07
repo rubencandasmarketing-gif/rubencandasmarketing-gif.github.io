@@ -204,11 +204,18 @@ body::before{
 .world .split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .world .lead{font-size:1.16rem;color:#3a4b47;margin-top:20px;max-width:44ch;font-weight:500}
 .svc{margin-top:38px;display:flex;flex-direction:column;gap:14px}
-.svc-item{background:var(--paper);border:1.5px solid var(--paper-2);border-radius:16px;padding:20px 22px;transition:.3s}
-.svc-item:hover{border-color:var(--teal);transform:translateX(6px)}
-.svc-item h3{font-size:1.28rem;font-weight:700;display:flex;align-items:center;gap:12px}
-.svc-item h3 .hx{color:var(--teal-ink);font-weight:900}
-.svc-item p{color:#4a5b57;margin-top:6px;font-size:.99rem}
+/* --- Servicios (redes): sección oscura y 4 fichas al mismo nivel --- */
+#servicios{background:var(--ink);color:var(--paper)}
+#servicios .sec-tag,#servicios .sec-tag .hx{color:var(--teal)}
+#servicios h2{color:var(--paper)}
+#servicios .page-intro{color:#cdd8d4}
+#servicios .chain .q{color:var(--teal)}
+#servicios .chain .next{background:var(--teal);color:var(--ink)}
+#servicios .chain .next:hover{background:var(--teal-soft)}
+.svc-item h3{position:relative;z-index:1;margin:0;font-size:1.28rem;font-weight:700;color:var(--paper)}
+.svc-item p{position:relative;z-index:1;margin-top:8px;color:#aebbb6;font-size:.99rem;line-height:1.5}
+.svc-num{position:absolute;top:6px;right:18px;z-index:0;font-family:'Roboto Slab',serif;font-weight:900;font-size:3.2rem;line-height:1;color:rgba(91,189,181,.12);pointer-events:none;transition:color .3s}
+.svc-item:hover .svc-num{color:rgba(91,189,181,.22)}
 .media{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 70px -30px var(--shadow)}
 .media img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
 .media:hover img{transform:scale(1.05)}
@@ -296,17 +303,17 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 }
 </style>
 <style>
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px}
-.svc-item .who{color:var(--teal-deep);font-weight:700;font-size:.92rem;margin-top:10px}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}
+.svc-item .who{position:relative;z-index:1;margin-top:12px;color:var(--teal);font-weight:700;font-size:.92rem}
 .page-intro{font-size:1.16rem;color:#3a4b47;max-width:52ch;margin-top:20px;font-weight:500}
 .hero-bridge{margin-top:22px;font-family:'Roboto Slab',serif;font-weight:700;font-size:clamp(1.12rem,1.9vw,1.5rem);color:var(--paper);max-width:32ch;line-height:1.15;opacity:0;transform:translateY(16px)}
 .hero-bridge b{color:var(--teal)}
 .hero.loaded .hero-bridge{transition:opacity .8s .55s,transform .8s .55s;opacity:1;transform:none}
-@media(max-width:720px){.svc-grid{grid-template-columns:1fr}}
-.svc-item{position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit}
-.svc-ghost{position:absolute;right:-6%;bottom:-22%;width:44%;aspect-ratio:1.249;opacity:.06;transform:skewX(-6deg);pointer-events:none;background:var(--teal-deep);-webkit-mask:var(--mark) center/contain no-repeat;mask:var(--mark) center/contain no-repeat}
-.svc-item:hover .svc-ghost{opacity:.12}
-.svc-more{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--teal-deep);font-weight:800;font-size:.95rem;transition:.3s}
+@media(max-width:820px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.svc-grid{grid-template-columns:1fr}}
+.svc-item{position:relative;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:26px;transition:transform .3s,background .3s}
+.svc-item:hover{transform:translateY(-6px);background:#17302b}
+.svc-more{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;color:var(--teal);font-weight:800;font-size:.95rem;transition:gap .3s}
 .svc-item:hover .svc-more{gap:13px}
 </style>
 </head>
@@ -356,32 +363,32 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <p class="page-intro reveal">Sin packs milagro ni compromisos raros. Elegimos juntos lo que encaja contigo según el tiempo que tengas y lo que quieras conseguir.</p>
     <div class="svc-grid">
       <a href="servicio-asesoria.html" class="svc-item reveal">
-        <h3><span class="hx">#</span> Asesoría</h3>
+        <span class="svc-num" aria-hidden="true">01</span>
+        <h3>Asesoría</h3>
         <p>Una sesión para poner las cosas en su sitio: revisamos tus redes, tu público y tu objetivo, y sales con un plan claro de qué hacer y, sobre todo, qué dejar de hacer.</p>
         <p class="who">Para ti si quieres claridad sin atarte a nada más.</p>
         <span class="svc-more">Ver detalle →</span>
-        <span class="svc-ghost"></span>
       </a>
       <a href="servicio-gestion-mensual.html" class="svc-item reveal">
-        <h3><span class="hx">#</span> Gestión mensual</h3>
+        <span class="svc-num" aria-hidden="true">02</span>
+        <h3>Gestión mensual</h3>
         <p>Me encargo yo de todo: estrategia, calendario, creación de contenido, publicación y seguimiento mes a mes, ajustando según lo que funciona.</p>
         <p class="who">Para ti si no tienes tiempo y quieres que, simplemente, funcione.</p>
         <span class="svc-more">Ver detalle →</span>
-        <span class="svc-ghost"></span>
       </a>
       <a href="servicio-mentoria.html" class="svc-item reveal">
-        <h3><span class="hx">#</span> Mentoría</h3>
+        <span class="svc-num" aria-hidden="true">03</span>
+        <h3>Mentoría</h3>
         <p>Las llevas tú, pero no a ciegas. Una sesión al mes y soporte entre medias para que aprendas a planificar, crear y medir sin perderte.</p>
         <p class="who">Para ti si quieres autonomía y ahorrarte la gestión.</p>
         <span class="svc-more">Ver detalle →</span>
-        <span class="svc-ghost"></span>
       </a>
       <a href="servicio-eventos.html" class="svc-item reveal">
-        <h3><span class="hx">#</span> Cobertura de eventos</h3>
+        <span class="svc-num" aria-hidden="true">04</span>
+        <h3>Cobertura de eventos</h3>
         <p>Que se enteren antes de que empiece, lo vivan durante y se acuerden cuando termine. Cobertura en directo y contenido para difundir.</p>
         <p class="who">Para ti si organizas jornadas, ferias o actos.</p>
         <span class="svc-more">Ver detalle →</span>
-        <span class="svc-ghost"></span>
       </a>
     </div>
     <div class="chain reveal">
