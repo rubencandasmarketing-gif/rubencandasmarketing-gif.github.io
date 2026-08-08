@@ -262,6 +262,22 @@ body::before{
   text-decoration:none;padding:18px 34px;border-radius:100px;font-weight:800;font-size:1.1rem;transition:.3s}
 .contact .btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px -16px rgba(16,31,28,.5)}
 .contact .fine{margin-top:26px;font-family:'Caveat',cursive;font-weight:700;font-size:1.45rem;color:#123f3a}
+/* --- Formulario de contacto dinámico (redes) --- */
+.cform{max-width:580px;margin:28px auto 0;text-align:left}
+.cform label{display:block;margin:16px 0 6px;font-weight:700;font-size:.9rem;color:var(--ink)}
+.cform .req{color:var(--bolt)}
+.cform input,.cform select,.cform textarea{width:100%;font-family:inherit;font-size:1rem;color:var(--paper);background:var(--ink);border:1px solid rgba(16,31,28,.3);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+.cform input::placeholder,.cform textarea::placeholder{color:#8fa39d}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--paper);box-shadow:0 0 0 3px rgba(245,242,234,.4)}
+.cform textarea{min-height:108px;resize:vertical;line-height:1.5}
+.cform select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23f5f2ea' stroke-width='2'%3E%3Cpath d='M1 1.5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.cform input[type="date"]{color-scheme:dark}
+.cform .check{display:flex;align-items:flex-start;gap:11px;margin-top:22px}
+.cform .check input{width:auto;flex:none;margin-top:3px;accent-color:var(--ink)}
+.cform .check label{margin:0;font-weight:600;font-size:.92rem}
+.cform .check a{color:var(--ink);font-weight:800;text-decoration:underline}
+.cform button{margin-top:24px;width:100%;background:var(--paper);color:var(--ink);border:0;border-radius:100px;padding:15px 24px;font-family:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.cform button:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(16,31,28,.55)}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -401,7 +417,74 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 <section class="contact" id="contacto">
   <h2>¿Hablamos de tus redes?</h2>
   <p>Cuéntame tu situación y vemos qué encaja. Sin packs cerrados.</p>
-  <a href="mailto:hola@rubencandas.com?subject=Consulta" class="btn">Escríbeme <span>→</span></a>
+  <form class="cform" id="contact-form" action="https://formspree.io/f/myegkdab" method="POST">
+    <input type="hidden" name="_subject" value="Nuevo contacto desde la web">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+
+    <label for="cf-nombre">Nombre <span class="req">*</span></label>
+    <input type="text" id="cf-nombre" name="nombre" autocomplete="name" required>
+
+    <label for="cf-email">Email <span class="req">*</span></label>
+    <input type="email" id="cf-email" name="email" autocomplete="email" required>
+
+    <label for="cf-perfiles">Perfiles en RRSS</label>
+    <input type="text" id="cf-perfiles" name="perfiles_rrss" placeholder="Enlace o usuario de tu Instagram, Facebook...">
+
+    <label for="cf-servicio">¿Qué servicio te interesa? <span class="req">*</span></label>
+    <select id="cf-servicio" name="servicio" required>
+      <option value="" disabled selected>Elige una opción</option>
+      <option value="Gestión de RRSS">Gestión de RRSS</option>
+      <option value="Asesoría">Asesoría</option>
+      <option value="Mentoría">Mentoría</option>
+      <option value="Cobertura de eventos">Cobertura de eventos</option>
+    </select>
+
+    <div class="fld-block" data-service="Gestión de RRSS" hidden>
+      <label for="cf-presupuesto">Presupuesto aproximado <span class="req">*</span></label>
+      <select id="cf-presupuesto" name="presupuesto" required disabled>
+        <option value="" disabled selected>Elige una opción</option>
+        <option value="250 – 350 €/mes">250 – 350 €/mes</option>
+        <option value="350 – 500 €/mes">350 – 500 €/mes</option>
+        <option value="Más de 500 €/mes">Más de 500 €/mes</option>
+        <option value="No lo tengo claro / quiero que me asesores">No lo tengo claro / quiero que me asesores</option>
+      </select>
+      <label for="cf-problema-g">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-problema-g" name="problema_rrss" required disabled></textarea>
+    </div>
+
+    <div class="fld-block" data-service="Asesoría" hidden>
+      <label for="cf-problema-a">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-problema-a" name="problema_rrss" required disabled></textarea>
+      <label for="cf-organiza-a">Cuéntame cómo te organizas para llevar las RRSS <span class="req">*</span></label>
+      <textarea id="cf-organiza-a" name="organizacion" required disabled></textarea>
+    </div>
+
+    <div class="fld-block" data-service="Mentoría" hidden>
+      <label for="cf-problema-m">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-problema-m" name="problema_rrss" required disabled></textarea>
+      <label for="cf-organiza-m">Cuéntame cómo te organizas para llevar las RRSS <span class="req">*</span></label>
+      <textarea id="cf-organiza-m" name="organizacion" required disabled></textarea>
+    </div>
+
+    <div class="fld-block" data-service="Cobertura de eventos" hidden>
+      <label for="cf-fecha">Fecha del evento <span class="req">*</span></label>
+      <input type="date" id="cf-fecha" name="fecha_evento" required disabled>
+      <label for="cf-evento">Explícame brevemente en qué consiste <span class="req">*</span></label>
+      <textarea id="cf-evento" name="descripcion_evento" required disabled></textarea>
+      <label for="cf-objetivo">¿Qué objetivo tienes con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-objetivo" name="objetivo_rrss" required disabled></textarea>
+    </div>
+
+    <label for="cf-mas">Algo más que quieras contarme</label>
+    <textarea id="cf-mas" name="algo_mas"></textarea>
+
+    <div class="check">
+      <input type="checkbox" id="cf-priv" name="privacidad" value="Acepto la política de privacidad" required>
+      <label for="cf-priv">He leído y acepto la <a href="politica-privacidad.html">política de privacidad</a>.</label>
+    </div>
+
+    <button type="submit">Enviar mensaje</button>
+  </form>
 </section>
 
 <footer>
@@ -455,6 +538,26 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   t.addEventListener('click',function(){t.getAttribute('aria-expanded')==='true'?closeMenu():openMenu();});
   m.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});
   document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.key==='Esc')&&t.getAttribute('aria-expanded')==='true'){closeMenu();t.focus();}});
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById('contact-form');
+  if(!form)return;
+  var svc=form.querySelector('[name="servicio"]');
+  var blocks=form.querySelectorAll('.fld-block');
+  var subj=form.querySelector('[name="_subject"]');
+  function update(){
+    var val=svc.value;
+    blocks.forEach(function(b){
+      var on=b.getAttribute('data-service')===val;
+      b.hidden=!on;
+      b.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!on;});
+    });
+    subj.value=val?('Nuevo contacto desde la web ('+val+')'):'Nuevo contacto desde la web';
+  }
+  svc.addEventListener('change',update);
+  update();
 })();
 </script>
 </body>
