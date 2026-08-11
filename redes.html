@@ -278,6 +278,12 @@ body::before{
 .cform .check a{color:var(--ink);font-weight:800;text-decoration:underline}
 .cform button{margin-top:24px;width:100%;background:var(--paper);color:var(--ink);border:0;border-radius:100px;padding:15px 24px;font-family:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
 .cform button:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(16,31,28,.55)}
+.cform button:disabled{opacity:.7;cursor:default;transform:none}
+.cform-msg{max-width:580px;margin:28px auto 0;text-align:left;background:var(--ink);color:var(--paper);border:1px solid rgba(16,31,28,.3);border-radius:16px;padding:28px 26px}
+.cform-msg.error{border-color:rgba(232,64,47,.55)}
+.cform-msg h3{font-family:'Roboto Slab',serif;font-weight:900;font-size:1.4rem;color:var(--paper);margin:0 0 10px}
+.cform-msg p{color:#cdd8d4;font-size:1.02rem;line-height:1.55;margin:0}
+.cform-msg a{color:var(--teal);text-decoration:underline;font-weight:700}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -485,6 +491,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 
     <button type="submit">Enviar mensaje</button>
   </form>
+  <div class="cform-msg" id="cform-msg" role="status" aria-live="polite" hidden></div>
 </section>
 
 <footer>
@@ -558,6 +565,32 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   }
   svc.addEventListener('change',update);
   update();
+
+  var msg=document.getElementById('cform-msg');
+  var btn=form.querySelector('button[type="submit"]');
+  function showMsg(kind,html){
+    msg.className='cform-msg'+(kind==='error'?' error':'');
+    msg.innerHTML=html;
+    msg.hidden=false;
+    msg.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var label=btn.textContent;
+    btn.disabled=true;btn.textContent='Enviando…';
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(function(res){
+        if(!res.ok)throw new Error('bad response');
+        form.hidden=true;
+        showMsg('ok','<h3>¡Gracias!</h3><p>He recibido tu mensaje y te contesto en cuanto pueda, como una persona, no como un bot.</p>');
+        form.reset();update();
+      })
+      .catch(function(){
+        showMsg('error','<h3>Uy, no ha salido…</h3><p>Algo ha fallado al enviar el formulario. Inténtalo de nuevo en un momento o escríbeme directamente a <a href="mailto:hola@rubencandas.com">hola@rubencandas.com</a>.</p>');
+      })
+      .finally(function(){ btn.disabled=false;btn.textContent=label; });
+  });
 })();
 </script>
 </body>
