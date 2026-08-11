@@ -371,6 +371,21 @@ body::before{
 .faq-a{height:0;overflow:hidden;transition:height .3s ease}
 .faq-a-in p{margin:0;padding:0 20px 20px;color:#3a4b47;font-size:1rem;line-height:1.6}
 @media(max-width:600px){.faq-btn{font-size:1rem;padding:16px}.faq-a-in p{padding:0 16px 16px}}
+/* --- Franja de clientes (marquesina) --- */
+.clients{padding:42px 0 40px;overflow:hidden;background:var(--paper)}
+.clients-tag{text-align:center;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--teal-ink);margin:0 0 24px}
+.clients-marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.clients-track{display:flex;width:max-content}
+.clients-track.ready{animation:clients-scroll 34s linear infinite}
+.clients-marquee:hover .clients-track.ready{animation-play-state:paused}
+@keyframes clients-scroll{to{transform:translateX(calc(-1 * var(--set-w,0px)))}}
+.clients-set{display:flex;align-items:center}
+.client-logo{flex:none;display:flex;align-items:center;justify-content:center;height:52px;margin-right:56px;text-decoration:none;filter:grayscale(1);opacity:.55;transition:opacity .3s,filter .3s}
+.client-logo:hover,.client-logo:focus-visible{filter:grayscale(0);opacity:1;outline:none}
+.client-logo img{max-height:52px;max-width:150px;width:auto;object-fit:contain;display:block}
+.client-ph{display:flex;align-items:center;justify-content:center;height:52px;min-width:150px;padding:0 20px;border:1px dashed rgba(16,31,28,.3);border-radius:10px;color:#3a4b47;font-weight:700;font-size:.88rem;white-space:nowrap}
+@media(max-width:600px){.client-logo{margin-right:36px;height:46px}.client-ph{min-width:126px;height:46px;font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){.clients-track.ready{animation:none}.clients-track{flex-wrap:wrap;justify-content:center;width:auto}.client-logo{margin:8px 18px}}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -464,6 +479,34 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <div class="scrollcue"><a href="#servicios" style="text-decoration:none"><span class="bubble floaty">¿Y esto cómo funciona? Baja y te lo cuento</span></a></div>
   </div>
 </header>
+
+<!-- ============================================================
+     FRANJA "CONFÍAN EN MÍ" (logos de clientes)
+     Ahora hay 6 logos de EJEMPLO. Para poner los reales:
+       1) Sube cada logo a img/clientes/ (p. ej. cliente-1.png).
+       2) En cada bloque <a class="client-logo"> de abajo cambia:
+          - href="#"          -> la web del cliente (https://...)
+          - aria-label="..."  -> el nombre del cliente
+          - sustituye  <span class="client-ph">Logo cliente N</span>
+            por        <img src="img/clientes/cliente-N.png" alt="Nombre">
+     Puedes añadir o quitar bloques libremente; el bucle se ajusta solo
+     (los logos se duplican por JavaScript). Guía completa en img/clientes/README.txt
+     ============================================================ -->
+<section class="clients" aria-label="Negocios que confían en Rubén Candás">
+  <p class="clients-tag">Negocios que ya confían en mí</p>
+  <div class="clients-marquee">
+    <div class="clients-track" id="clientsTrack">
+      <div class="clients-set">
+        <!-- CLIENTE 1 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 1"><span class="client-ph">Logo cliente 1</span></a>
+        <!-- CLIENTE 2 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 2"><span class="client-ph">Logo cliente 2</span></a>
+        <!-- CLIENTE 3 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 3"><span class="client-ph">Logo cliente 3</span></a>
+        <!-- CLIENTE 4 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 4"><span class="client-ph">Logo cliente 4</span></a>
+        <!-- CLIENTE 5 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 5"><span class="client-ph">Logo cliente 5</span></a>
+        <!-- CLIENTE 6 --><a class="client-logo" href="#" target="_blank" rel="noopener noreferrer" aria-label="Logo cliente 6"><span class="client-ph">Logo cliente 6</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="sec world" id="servicios">
   <div class="wrap">
@@ -751,6 +794,35 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       if(!isOpen)expand(item);
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var track=document.getElementById('clientsTrack');
+  if(!track)return;
+  var mq=track.parentElement;
+  var baseHTML=track.innerHTML; // una sola fila de logos (la que editas)
+  function build(){
+    var vw=mq.offsetWidth;
+    if(!vw){requestAnimationFrame(build);return;} // esperar a que la página tenga anchura
+    track.classList.remove('ready');
+    track.innerHTML=baseHTML;
+    var set=track.querySelector('.clients-set');
+    var setW=set.offsetWidth;
+    if(!setW){requestAnimationFrame(build);return;}
+    var need=vw*2+setW, guard=0;
+    while(track.scrollWidth<need && guard<24){
+      var c=set.cloneNode(true);
+      c.setAttribute('aria-hidden','true');
+      track.appendChild(c);
+      guard++;
+    }
+    track.style.setProperty('--set-w', setW+'px');
+    track.classList.add('ready');
+  }
+  build();
+  window.addEventListener('load',build); // recalcular cuando carguen las fuentes
+  var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(build,200);});
 })();
 </script>
 </body>
