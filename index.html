@@ -27,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#101f1c">
+<link rel="preload" as="image" href="img/hero-inicio.jpg" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -98,6 +100,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* Fase 2: microdetalles de acabado */
 ::selection{background:var(--teal);color:var(--ink)}
 a,button{-webkit-tap-highlight-color:transparent}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:var(--r);font-weight:700;text-decoration:none;transition:top .2s var(--ease)}
+.skip-link:focus{top:12px}
 
 /* grain */
 body::before{
@@ -331,8 +335,9 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 </style>
 </head>
 <body>
+<a class="skip-link" href="#hero">Saltar al contenido</a>
 
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Navegación principal">
   <a href="#hero" class="brand" aria-label="Rubén Candás"><span class="brand-logo"></span></a>
   <div class="nav-links">
     <a href="redes.html">Gestión de RRSS</a>
@@ -354,8 +359,8 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 </nav>
 
 <!-- HERO -->
-<header class="hero" id="hero">
-  <img class="hero-img" src="img/hero-inicio.jpg" width="1100" height="733" alt="Rubén Candás">
+<header class="hero" id="hero" tabindex="-1">
+  <img class="hero-img" src="img/hero-inicio.jpg" width="1100" height="733" fetchpriority="high" decoding="async" alt="Rubén Candás">
   <div class="hero-scrim"></div>
   <div class="hero-inner">
     <span class="eyebrow"><span class="line"></span>Maestro de Primaria reconvertido en community manager</span>
