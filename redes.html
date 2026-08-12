@@ -513,27 +513,21 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 </header>
 
 <!-- ============================================================
-     FRANJA "CONFIAN EN MI" (logos de clientes) - DESACTIVADA TEMPORALMENTE
-     De momento solo hay 1 logo real (FbMPA), asi que la franja esta OCULTA
-     para no mostrarla a medias con placeholders. El logo de FbMPA ya esta
-     colocado dentro (el primero), listo para cuando la reactivemos.
+     FRANJA "CONFIAN EN MI" (logos de clientes) - ACTIVA
+     Carrusel automatico de logos de clientes (en gris, y a color al
+     pasar el raton; se pausa al pasar por encima).
 
-     >>> PARA REACTIVAR LA FRANJA (cuando haya mas logos reales):
-         Borra la linea de abajo  "INICIO franja (borrar ..."  y la linea
-         "FIN franja (borrar ..."  del final. Al quitar esas dos lineas,
-         el <section class="clients"> vuelve a estar activo y visible.
+     PARA ANADIR UN LOGO (dentro de <div class="clients-set">, mas abajo):
+       1) Sube el archivo a img/clientes/  (p. ej. cliente.png).
+       2) Copia un bloque <a class="client-logo"> ya existente y cambia
+          solo 3 cosas: el enlace (href), el nombre (aria-label) y la
+          imagen (src y alt).
+       El carrusel (JavaScript) se ajusta solo al numero de logos.
+       Guia completa en img/clientes/README.txt
 
-     >>> PARA ANADIR UN LOGO (dentro de <div class="clients-set">):
-         1) Sube el archivo a img/clientes/  (p. ej. logo-cliente.png).
-         2) Copia el bloque del logo de FbMPA y cambia solo 3 cosas:
-            el enlace (href), el aria-label (nombre) y el src/alt de la imagen.
-            Plantilla de un logo:
-            [a class="client-logo" href="https://WEB" target="_blank" rel="noopener noreferrer" aria-label="NOMBRE"][img src="img/clientes/ARCHIVO.png" alt="NOMBRE"][/a]
-         Los placeholders "Logo cliente 2..6" son de ejemplo: cambialos por logos
-         reales o borralos. El carrusel (JavaScript) se ajusta solo al numero de
-         logos. Guia completa en img/clientes/README.txt
+     PARA OCULTAR LA FRANJA otra vez: comenta el bloque
+     <section class="clients"> ... </section> de abajo (o pidelo).
      ============================================================ -->
-<!-- INICIO franja (borrar esta linea para reactivar)
 <section class="clients" aria-label="Negocios que confían en Rubén Candás">
   <p class="clients-tag">Negocios que ya confían en mí</p>
   <div class="clients-marquee">
@@ -554,7 +548,6 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     </div>
   </div>
 </section>
-FIN franja (borrar esta linea para reactivar) -->
 
 <section class="sec world" id="servicios">
   <div class="wrap">
