@@ -202,12 +202,28 @@ body::before{
 .myth .real::before{content:"→";position:absolute;left:0;top:2px;color:var(--teal);font-weight:800}
 .myth .real b{color:var(--teal)}
 @media(max-width:720px){.myth-grid{grid-template-columns:1fr}}
-/* --- Foto integrada en la sección de contraste --- */
-.myths-top{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-.myths-intro{min-width:0}
-.myths-photo{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:3/2;box-shadow:0 30px 60px -28px rgba(0,0,0,.6);border:1px solid rgba(245,242,234,.1)}
-.myths-photo img{width:100%;height:100%;object-fit:cover;display:block}
-@media(max-width:860px){.myths-top{grid-template-columns:1fr;gap:26px}}
+/* --- Fondos ambientales (fotos de charlas muy tenues tras el contenido) --- */
+#reacciones{--photo:url("img/charlas/charla-auditorio.jpg")}
+#publicos{--photo:url("img/charlas/charla-excusas.jpg")}
+#como-funciona{--photo:url("img/charlas/charla-panel.jpg")}
+#reacciones,#publicos,#como-funciona{position:relative;isolation:isolate;background:var(--ink)}
+#reacciones>.wrap,#publicos>.wrap,#como-funciona>.wrap{position:relative;z-index:1}
+#reacciones::before,#publicos::before,#como-funciona::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(105deg,rgba(16,31,28,.93),rgba(16,31,28,.86) 55%,rgba(16,31,28,.9)),var(--photo);background-size:cover;background-position:center}
+@media(max-width:600px){#reacciones::before,#publicos::before,#como-funciona::before{background-image:linear-gradient(rgba(16,31,28,.95),rgba(16,31,28,.92)),var(--photo)}}
+/* #publicos y #como-funciona: texto y tarjetas en versión oscura (antes eran claras) */
+#publicos h2,#como-funciona h2{color:var(--paper)}
+#publicos .page-intro,#como-funciona .page-intro{color:#cdd8d4}
+#publicos .sec-tag,#publicos .sec-tag .hx,#como-funciona .sec-tag,#como-funciona .sec-tag .hx{color:var(--teal)}
+#publicos .svc-item{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+#publicos .svc-item h3{color:var(--paper)}
+#publicos .svc-item h3 .hx{color:var(--teal)}
+#publicos .svc-item p{color:#aebbb6}
+#como-funciona .pub{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+#como-funciona .pub h3{color:var(--paper)}
+#como-funciona .pub p{color:#aebbb6}
+#como-funciona .fmt-label,#como-funciona .chain .q{color:var(--teal)}
+#como-funciona .chain .next{background:var(--teal);color:var(--ink)}
+#como-funciona .chain .next:hover{background:var(--teal-soft)}
 
 /* ---------- WORLD (redes) ---------- */
 .world{position:relative}
@@ -377,16 +393,9 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 
 <section class="sec myths" id="reacciones">
   <div class="wrap">
-    <div class="myths-top">
-      <div class="myths-intro">
-        <span class="sec-tag"><span class="hx">#</span> Antes de nada</span>
-        <h2 class="reveal">Lo que solemos hacer. Y lo que de verdad ayuda.</h2>
-        <p class="page-intro reveal">Casi siempre con toda la buena intención. Pero desde el miedo o la prohibición es muy difícil acompañar.</p>
-      </div>
-      <figure class="myths-photo reveal">
-        <img src="img/charlas/charla-auditorio.jpg" width="1300" height="866" loading="lazy" alt="Rubén Candás dando una charla en un auditorio lleno">
-      </figure>
-    </div>
+    <span class="sec-tag"><span class="hx">#</span> Antes de nada</span>
+    <h2 class="reveal">Lo que solemos hacer. Y lo que de verdad ayuda.</h2>
+    <p class="page-intro reveal">Casi siempre con toda la buena intención. Pero desde el miedo o la prohibición es muy difícil acompañar.</p>
     <div class="myth-grid">
       <div class="myth reveal">
         <p class="told"><s>Prohibir el móvil y listo.</s></p>
