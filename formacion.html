@@ -279,8 +279,11 @@ body::before{
 .form-note{display:inline-block;font-family:'Caveat',cursive;font-weight:700;color:var(--teal-deep);font-size:1.35rem;transform:rotate(-1deg);margin-bottom:8px}
 .pubs{margin-top:32px;display:flex;flex-direction:column;gap:12px}
 .pub{display:flex;gap:16px;align-items:flex-start;background:var(--paper);border-radius:var(--r);padding:18px 20px;border:1.5px solid var(--paper-2)}
-.pub .ic{flex:0 0 42px;height:42px;border-radius:11px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;
-  font-family:'Roboto Slab',serif;font-weight:900;color:var(--teal-deep);font-size:1.2rem}
+/* Numeros de acento en contorno (pasos y publicos) - sin chip */
+.pub .ic,.pub3-num{font-family:'Roboto Slab',serif;font-weight:900;font-size:2.4rem;line-height:1;color:var(--teal)}
+@supports (-webkit-text-stroke:1px red){.pub .ic,.pub3-num{color:transparent;-webkit-text-stroke:1.4px var(--teal)}}
+.pub .ic{flex:0 0 auto}
+.pub3-num{display:block;margin-bottom:var(--sp-1)}
 .pub h3{font-size:var(--step-1);font-weight:700}
 .pub p{color:#4a5b57;font-size:.96rem;margin-top:3px;line-height:1.6}
 .media.tall{aspect-ratio:3/4}
@@ -455,17 +458,20 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <p class="page-intro reveal">Trabajo con quien acompaña a los adolescentes en su día a día. Estos son los públicos con los que más me muevo.</p>
     <div class="pub3">
       <div class="svc-item reveal">
-        <h3><span class="hx">#</span> Familias, madres y padres</h3>
+        <span class="pub3-num" aria-hidden="true">01</span>
+        <h3>Familias, madres y padres</h3>
         <p>Que ven cómo cualquier conversación sobre pantallas acaba en discusión. Para entender antes de decidir y poner límites sin romper la confianza.</p>
         <span class="svc-ghost"></span>
       </div>
       <div class="svc-item reveal">
-        <h3><span class="hx">#</span> Centros educativos y AMPAs</h3>
+        <span class="pub3-num" aria-hidden="true">02</span>
+        <h3>Centros educativos y AMPAs</h3>
         <p>Que detectan conflictos por redes y buscan prevención y herramientas reales, no una charla puntual que se olvida al día siguiente.</p>
         <span class="svc-ghost"></span>
       </div>
       <div class="svc-item reveal">
-        <h3><span class="hx">#</span> Ayuntamientos e instituciones</h3>
+        <span class="pub3-num" aria-hidden="true">03</span>
+        <h3>Ayuntamientos e instituciones</h3>
         <p>Que trabajan con infancia, adolescencia y familias y quieren formaciones actuales, responsables y con impacto, adaptadas a su contexto.</p>
         <span class="svc-ghost"></span>
       </div>
@@ -497,9 +503,9 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <h2 class="reveal">Aquí no eliges de un menú. La diseño para ti.</h2>
     <p class="page-intro reveal">Ninguna formación es igual a la anterior. Elijo los temas, el enfoque y el formato según quién tenga delante y qué os preocupe.</p>
     <div class="pubs" style="margin-top:40px">
-      <div class="pub reveal"><span class="ic">1</span><div><h3>Me cuentas tu caso</h3><p>Quién es el público, qué os preocupa y en qué contexto. En cinco minutos me hago una idea clara.</p></div></div>
-      <div class="pub reveal"><span class="ic">2</span><div><h3>La diseño a tu medida</h3><p>Escojo temas, enfoque y formato que encajen con vosotros. Nada estándar, nada enlatado.</p></div></div>
-      <div class="pub reveal"><span class="ic">3</span><div><h3>La llevo a tu sitio</h3><p>Charla, taller o programa, donde estéis y cuando os venga bien.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">01</span><div><h3>Me cuentas tu caso</h3><p>Quién es el público, qué os preocupa y en qué contexto. En cinco minutos me hago una idea clara.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">02</span><div><h3>La diseño a tu medida</h3><p>Escojo temas, enfoque y formato que encajen con vosotros. Nada estándar, nada enlatado.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">03</span><div><h3>La llevo a tu sitio</h3><p>Charla, taller o programa, donde estéis y cuando os venga bien.</p></div></div>
     </div>
     <p class="fmt-label reveal">en formato de charla, taller, formación docente o programa</p>
     <div class="chain reveal" style="margin-top:20px">
