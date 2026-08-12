@@ -236,8 +236,8 @@ body::before{
 .form-note{display:inline-block;font-family:'Caveat',cursive;font-weight:700;color:var(--teal-deep);font-size:1.35rem;transform:rotate(-1deg);margin-bottom:8px}
 .pubs{margin-top:32px;display:flex;flex-direction:column;gap:12px}
 .pub{display:flex;gap:16px;align-items:flex-start;background:var(--paper);border-radius:var(--r);padding:18px 20px;border:1.5px solid var(--paper-2)}
-.pub .ic{flex:0 0 42px;height:42px;border-radius:11px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;
-  font-family:'Roboto Slab',serif;font-weight:900;color:var(--teal-deep);font-size:1.2rem}
+/* Check sobrio (Que te llevas): sin chip, verde con contraste sobre fondo claro */
+.pub .ic{flex:0 0 auto;color:var(--teal-ink);font-weight:900;font-size:1.2rem;line-height:1.5}
 .pub h3{font-size:var(--step-1);font-weight:700}
 .pub p{color:#4a5b57;font-size:.96rem;margin-top:3px;line-height:1.6}
 .media.tall{aspect-ratio:3/4}
@@ -316,7 +316,9 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 .myths .pub{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
 .myths .pub h3{color:var(--paper)}
 .myths .pub p{color:#aebbb6}
-.num .ic{background:var(--teal);color:var(--ink)}
+/* Numeros de acento en contorno (pasos numerados .pubs.num), sobre fondo oscuro */
+.num .ic{font-family:'Roboto Slab',serif;font-weight:900;font-size:2.4rem;line-height:1;color:var(--teal)}
+@supports (-webkit-text-stroke:1px red){.num .ic{color:transparent;-webkit-text-stroke:1.4px var(--teal)}}
 </style>
 </head>
 <body>
@@ -367,9 +369,9 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <span class="sec-tag"><span class="hx">#</span> Cómo funciona</span>
     <h2 class="reveal">Cómo nos organizamos.</h2>
     <div class="pubs num" style="margin-top:40px">
-      <div class="pub reveal"><span class="ic">1</span><div><h3>Sesión mensual</h3><p>Repasamos lo hecho y preparamos lo siguiente.</p></div></div>
-      <div class="pub reveal"><span class="ic">2</span><div><h3>Tu plan de trabajo</h3><p>Sales con tareas claras para el mes.</p></div></div>
-      <div class="pub reveal"><span class="ic">3</span><div><h3>Soporte entre medias</h3><p>¿Una duda a mitad de mes? Me escribes y no te atascas.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">01</span><div><h3>Sesión mensual</h3><p>Repasamos lo hecho y preparamos lo siguiente.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">02</span><div><h3>Tu plan de trabajo</h3><p>Sales con tareas claras para el mes.</p></div></div>
+      <div class="pub reveal"><span class="ic" aria-hidden="true">03</span><div><h3>Soporte entre medias</h3><p>¿Una duda a mitad de mes? Me escribes y no te atascas.</p></div></div>
     </div>
   </div>
 </section>
