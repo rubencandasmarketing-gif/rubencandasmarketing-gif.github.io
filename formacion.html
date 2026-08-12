@@ -259,6 +259,27 @@ body::before{
   text-decoration:none;padding:18px 34px;border-radius:100px;font-weight:800;font-size:1.1rem;transition:.3s}
 .contact .btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px -16px rgba(16,31,28,.5)}
 .contact .fine{margin-top:26px;font-family:'Caveat',cursive;font-weight:700;font-size:1.45rem;color:#123f3a}
+/* --- Formulario de contacto (formación) --- */
+.cform{max-width:580px;margin:28px auto 0;text-align:left}
+.cform label{display:block;margin:16px 0 6px;font-weight:700;font-size:.9rem;color:var(--ink)}
+.cform .req{color:var(--bolt)}
+.cform input,.cform select,.cform textarea{width:100%;font-family:inherit;font-size:1rem;color:var(--paper);background:var(--ink);border:1px solid rgba(16,31,28,.3);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+.cform input::placeholder,.cform textarea::placeholder{color:#8fa39d}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--paper);box-shadow:0 0 0 3px rgba(245,242,234,.4)}
+.cform textarea{min-height:108px;resize:vertical;line-height:1.5}
+.cform select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23f5f2ea' stroke-width='2'%3E%3Cpath d='M1 1.5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.cform .check{display:flex;align-items:flex-start;gap:11px;margin-top:22px}
+.cform .check input{width:auto;flex:none;margin-top:3px;accent-color:var(--ink)}
+.cform .check label{margin:0;font-weight:600;font-size:.92rem}
+.cform .check a{color:var(--ink);font-weight:800;text-decoration:underline}
+.cform button{margin-top:24px;width:100%;background:var(--paper);color:var(--ink);border:0;border-radius:100px;padding:15px 24px;font-family:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.cform button:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(16,31,28,.55)}
+.cform button:disabled{opacity:.7;cursor:default;transform:none}
+.cform-msg{max-width:580px;margin:28px auto 0;text-align:left;background:var(--ink);color:var(--paper);border:1px solid rgba(16,31,28,.3);border-radius:16px;padding:28px 26px}
+.cform-msg.error{border-color:rgba(232,64,47,.55)}
+.cform-msg h3{font-family:'Roboto Slab',serif;font-weight:900;font-size:1.4rem;color:var(--paper);margin:0 0 10px}
+.cform-msg p{color:#cdd8d4;font-size:1.02rem;line-height:1.55;margin:0}
+.cform-msg a{color:var(--teal);text-decoration:underline;font-weight:700}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -438,7 +459,57 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 <section class="contact" id="contacto">
   <h2>¿Lo llevamos a tu centro o tu municipio?</h2>
   <p>Cuéntame el contexto y el tipo de público, y te propongo una formación a medida.</p>
-  <a href="mailto:formacion@rubencandas.com?subject=Consulta%20sobre%20charlas%20y%20talleres" class="btn">Escríbeme <span>→</span></a>
+  <form class="cform" id="contact-form" action="https://formspree.io/f/xaewjwjr" method="POST">
+    <input type="hidden" name="_subject" value="Nuevo contacto desde la web (Formación)">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+
+    <label for="cf-nombre">Nombre <span class="req">*</span></label>
+    <input type="text" id="cf-nombre" name="nombre" autocomplete="name" required>
+
+    <label for="cf-email">Email <span class="req">*</span></label>
+    <input type="email" id="cf-email" name="email" autocomplete="email" required>
+
+    <label for="cf-entidad">¿Desde dónde escribes? <span class="req">*</span></label>
+    <select id="cf-entidad" name="entidad" required>
+      <option value="" disabled selected>Elige una opción</option>
+      <option value="Centro educativo">Centro educativo</option>
+      <option value="AMPA">AMPA</option>
+      <option value="Asociación">Asociación</option>
+      <option value="Ayuntamiento">Ayuntamiento</option>
+      <option value="Otra entidad">Otra entidad</option>
+    </select>
+
+    <label for="cf-tematica">¿Sobre qué temática? <span class="req">*</span></label>
+    <select id="cf-tematica" name="tematica" required>
+      <option value="" disabled selected>Elige una opción</option>
+      <option value="Cómo usan realmente las redes los adolescentes">Cómo usan realmente las redes los adolescentes</option>
+      <option value="Influencers, referentes y comparación constante">Influencers, referentes y comparación constante</option>
+      <option value="Autoestima, validación y presión social online">Autoestima, validación y presión social online</option>
+      <option value="Riesgos reales en redes (sin alarmismo)">Riesgos reales en redes (sin alarmismo)</option>
+      <option value="Privacidad, huella digital e identidad online">Privacidad, huella digital e identidad online</option>
+      <option value="Límites, normas y acompañamiento digital">Límites, normas y acompañamiento digital</option>
+      <option value="Comunicación entre adultos y adolescentes">Comunicación entre adultos y adolescentes</option>
+      <option value="El papel de familias y centros educativos">El papel de familias y centros educativos</option>
+      <option value="No lo tengo claro / quiero que me asesores">No lo tengo claro / quiero que me asesores</option>
+    </select>
+
+    <label for="cf-publico">¿A qué público iría dirigida? <span class="req">*</span></label>
+    <input type="text" id="cf-publico" name="publico" placeholder="Familias, profesorado, alumnado... y qué curso o edades" required>
+
+    <label for="cf-fecha">¿Tienes fecha o época en mente?</label>
+    <input type="text" id="cf-fecha" name="fecha" placeholder="Una fecha, un trimestre, 'sin prisa'...">
+
+    <label for="cf-mensaje">Cuéntame brevemente qué buscáis <span class="req">*</span></label>
+    <textarea id="cf-mensaje" name="mensaje" required></textarea>
+
+    <div class="check">
+      <input type="checkbox" id="cf-priv" name="privacidad" value="Acepto la política de privacidad" required>
+      <label for="cf-priv">He leído y acepto la <a href="politica-privacidad.html">política de privacidad</a>.</label>
+    </div>
+
+    <button type="submit">Enviar mensaje</button>
+  </form>
+  <div class="cform-msg" id="cform-msg" role="status" aria-live="polite" hidden></div>
 </section>
 
 <footer>
@@ -492,6 +563,37 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   t.addEventListener('click',function(){t.getAttribute('aria-expanded')==='true'?closeMenu():openMenu();});
   m.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});
   document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.key==='Esc')&&t.getAttribute('aria-expanded')==='true'){closeMenu();t.focus();}});
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById('contact-form');
+  if(!form)return;
+  var msg=document.getElementById('cform-msg');
+  var btn=form.querySelector('button[type="submit"]');
+  function showMsg(kind,html){
+    msg.className='cform-msg'+(kind==='error'?' error':'');
+    msg.innerHTML=html;
+    msg.hidden=false;
+    msg.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var label=btn.textContent;
+    btn.disabled=true;btn.textContent='Enviando…';
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(function(res){
+        if(!res.ok)throw new Error('bad response');
+        form.hidden=true;
+        showMsg('ok','<h3>¡Gracias!</h3><p>He recibido tu mensaje y te contesto en cuanto pueda, como una persona, no como un bot.</p>');
+        form.reset();
+      })
+      .catch(function(){
+        showMsg('error','<h3>Uy, no ha salido…</h3><p>Algo ha fallado al enviar el formulario. Inténtalo de nuevo en un momento o escríbeme directamente a <a href="mailto:formacion@rubencandas.com">formacion@rubencandas.com</a>.</p>');
+      })
+      .finally(function(){ btn.disabled=false;btn.textContent=label; });
+  });
 })();
 </script>
 </body>
