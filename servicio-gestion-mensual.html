@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#101f1c">
 <style>
 :root{
   --ink:#101f1c;
@@ -72,6 +73,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* Fase 2: microdetalles de acabado */
 ::selection{background:var(--teal);color:var(--ink)}
 a,button{-webkit-tap-highlight-color:transparent}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:var(--r);font-weight:700;text-decoration:none;transition:top .2s var(--ease)}
+.skip-link:focus{top:12px}
 
 /* grain */
 body::before{
@@ -316,7 +319,8 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 </style>
 </head>
 <body>
-<nav class="nav" id="nav">
+<a class="skip-link" href="#hero">Saltar al contenido</a>
+<nav class="nav" id="nav" aria-label="Navegación principal">
   <a href="index.html" class="brand" aria-label="Rubén Candás"><span class="brand-logo"></span></a>
   <div class="nav-links">
     <a href="redes.html">Gestión de RRSS</a>
@@ -336,7 +340,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <a href="#contacto" class="nav-cta">Hablamos</a>
   </div>
 </nav>
-<header class="hero compact" id="hero">
+<header class="hero compact" id="hero" tabindex="-1">
   <div class="hero-inner">
     <a class="crumb" href="redes.html">← Gestión de RRSS</a>
     <span class="eyebrow"><span class="line"></span>Gestión de RRSS · Gestión mensual</span>
