@@ -155,7 +155,8 @@ body::before{
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   font-size:12.5px;color:var(--teal);margin-bottom:26px}
 .eyebrow .line{width:34px;height:2px;background:var(--teal)}
-.hero h1{font-size:var(--step-4);font-weight:900;max-width:15ch}
+.hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:900;max-width:none}
+.hero h1 .row span.accent{display:inline;transform:none;animation:none}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row span{display:block;transform:translateY(110%)}
 .hero h1 .accent{color:var(--teal)}
@@ -420,9 +421,8 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
   <div class="hero-inner">
     <span class="eyebrow"><span class="line"></span>Charlas y Talleres · Adolescentes y pantallas</span>
     <h1>
-      <span class="row"><span>Las redes no son</span></span>
-      <span class="row"><span>el <span class="accent">problema.</span></span></span>
-      <span class="row"><span>No entender su mundo, sí.</span></span>
+      <span class="row"><span>Las redes no son el&nbsp;<span class="accent">problema.</span></span></span>
+      <span class="row"><span>No entender su mundo,&nbsp;sí.</span></span>
     </h1>
     <p class="sub">Charlas y formaciones para familias, centros y entidades. Sin alarmismos ni sermones: contexto, sentido común y herramientas que de verdad puedes usar.</p>
     <div class="scrollcue"><a href="#reacciones" style="text-decoration:none"><span class="bubble floaty">¿Te suena de casa? Sigue leyendo</span></a></div>
