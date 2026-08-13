@@ -187,6 +187,7 @@ body::before{
 .doors-head{text-align:center;padding:92px 26px 40px}
 .doors-head .hand{color:var(--teal-deep);font-size:1.8rem;display:block;transform:rotate(-1.5deg)}
 .doors-head h2{font-size:var(--step-3);font-weight:900;margin-top:6px}
+.doors-sub{margin:14px auto 0;max-width:54ch;color:#4a5b57;font-size:var(--step-0);line-height:1.6}
 .doors{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1180px;margin:0 auto 40px;padding:0 26px}
 .door{position:relative;border-radius:var(--r);padding:40px 34px 34px;min-height:340px;display:flex;flex-direction:column;
   justify-content:space-between;overflow:hidden;text-decoration:none;transition:transform .4s var(--ease),box-shadow .4s var(--ease);
@@ -198,6 +199,9 @@ body::before{
 .door .tagnum{font-family:'Roboto Slab',serif;font-weight:900;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
 .door.biz .tagnum{color:var(--teal)}
 .door.fam .tagnum{color:var(--teal-ink)}
+.door-eyebrow{align-self:flex-start;font-family:'Roboto Slab',serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r-full);margin-bottom:14px}
+.door.biz .door-eyebrow{background:rgba(91,189,181,.15);color:var(--teal)}
+.door.fam .door-eyebrow{background:var(--teal-soft);color:var(--teal-ink)}
 .door .confession{font-family:'Roboto Slab',serif;font-weight:700;font-size:clamp(1.35rem,2.4vw,1.85rem);line-height:1.15;margin:22px 0 auto;max-width:20ch}
 .door .go{display:inline-flex;align-items:center;gap:12px;margin-top:28px;font-weight:800;font-size:1.05rem}
 .door .arrow{display:inline-flex;width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;transition:transform .35s var(--ease)}
@@ -381,15 +385,18 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 <section class="doors-head reveal">
   <span class="hand">venga, cuéntame…</span>
   <h2>¿Y tú qué buscas?</h2>
+  <p class="doors-sub">Gestiono las redes de tu negocio o te ayudo con el uso de las pantallas en casa y en el aula. Elige por dónde empezamos.</p>
 </section>
 <div class="doors">
   <a href="redes.html" class="door biz reveal">
+    <span class="door-eyebrow">Gestión de redes sociales</span>
     <span class="tagnum">Para tu negocio</span>
     <p class="confession">«No tengo tiempo, no entiendo las redes y no sé por dónde empezar.»</p>
     <span class="go">Ponme orden en esto <span class="arrow">→</span></span>
     <span class="ghost"></span>
   </a>
   <a href="formacion.html" class="door fam reveal">
+    <span class="door-eyebrow">Charlas y talleres sobre pantallas</span>
     <span class="tagnum">Para tu casa o tu centro</span>
     <p class="confession">«Convivo con adolescentes y las pantallas se han vuelto una guerra diaria.»</p>
     <span class="go">Ayúdame a entenderlo <span class="arrow">→</span></span>
