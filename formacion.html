@@ -234,8 +234,12 @@ body::before{
 #como-funciona{--photo:url("img/charlas/charla-panel.jpg")}
 #reacciones,#publicos,#como-funciona{position:relative;isolation:isolate;background:var(--ink)}
 #reacciones>.wrap,#publicos>.wrap,#como-funciona>.wrap{position:relative;z-index:1}
-#reacciones::before,#publicos::before,#como-funciona::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(105deg,rgba(16,31,28,.93),rgba(16,31,28,.86) 55%,rgba(16,31,28,.9)),var(--photo);background-size:cover;background-position:center}
-@media(max-width:600px){#reacciones::before,#publicos::before,#como-funciona::before{background-image:linear-gradient(rgba(16,31,28,.95),rgba(16,31,28,.92)),var(--photo)}}
+/* Fondos de seccion tipo "barrido": la foto se ve y se funde con el ink; distinto sentido en cada una */
+#reacciones::before,#publicos::before,#como-funciona::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center}
+#reacciones::before{background-image:linear-gradient(90deg,var(--ink) 30%,rgba(16,31,28,.72) 52%,rgba(16,31,28,.12) 100%),var(--photo)}
+#publicos::before{background-image:linear-gradient(270deg,var(--ink) 30%,rgba(16,31,28,.72) 52%,rgba(16,31,28,.12) 100%),var(--photo)}
+#como-funciona::before{background-image:linear-gradient(160deg,var(--ink) 30%,rgba(16,31,28,.6) 62%,rgba(16,31,28,.14) 100%),var(--photo)}
+@media(max-width:760px){#reacciones::before,#publicos::before,#como-funciona::before{background-image:linear-gradient(rgba(16,31,28,.85),rgba(16,31,28,.85)),var(--photo)}}
 /* #publicos y #como-funciona: texto y tarjetas en versión oscura (antes eran claras) */
 #publicos h2,#como-funciona h2{color:var(--paper)}
 #publicos .page-intro,#como-funciona .page-intro{color:#cdd8d4}
@@ -245,6 +249,15 @@ body::before{
 #publicos .svc-item h3 .hx{color:var(--teal)}
 #publicos .svc-item p{color:#aebbb6}
 #como-funciona .pub{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+/* Legibilidad de las tarjetas sobre la foto (ahora se ve mas) */
+#reacciones .myth{background:rgba(16,31,28,.7)}
+#publicos .svc-item{background:rgba(16,31,28,.7)}
+#como-funciona .pub{background:rgba(16,31,28,.7)}
+/* #publicos: cabecera a la derecha (barrido en sentido contrario) */
+#publicos .wrap{text-align:right}
+#publicos h2,#publicos .page-intro{margin-left:auto}
+#publicos .pub3{text-align:left}
+@media(max-width:760px){#publicos .wrap{text-align:left}#publicos h2,#publicos .page-intro{margin-left:0}}
 #como-funciona .pub h3{color:var(--paper)}
 #como-funciona .pub p{color:#aebbb6}
 #como-funciona .fmt-label,#como-funciona .chain .q{color:var(--teal)}
