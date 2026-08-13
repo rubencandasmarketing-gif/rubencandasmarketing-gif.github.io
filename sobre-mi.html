@@ -161,7 +161,8 @@ body::before{
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   font-size:12.5px;color:var(--teal);margin-bottom:26px}
 .eyebrow .line{width:34px;height:2px;background:var(--teal)}
-.hero h1{font-size:var(--step-4);font-weight:900;max-width:15ch}
+.hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:900;max-width:none}
+.hero h1 .row span.accent{display:inline;transform:none;animation:none}
 .hero h1 .row{display:block;overflow:hidden}
 .hero h1 .row span{display:block;transform:translateY(110%)}
 .hero h1 .accent{color:var(--teal)}
@@ -373,7 +374,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <span class="eyebrow"><span class="line"></span>¿Y este quién es?</span>
     <h1>
       <span class="row"><span>Maestro de Primaria reconvertido</span></span>
-      <span class="row"><span>en <span class="accent">community manager.</span></span></span>
+      <span class="row"><span>en&nbsp;<span class="accent">community manager.</span></span></span>
     </h1>
     <p class="sub">Llámalo como quieras —gestor de redes, consultor social media…—. Lo importante es lo que puedo hacer por ti.</p>
   </div>
