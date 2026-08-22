@@ -10,6 +10,12 @@
 # --- Pagina de error propia (la del adolescente sin wifi) ---
 ErrorDocument 404 /404.html
 
+# --- Declarar UTF-8 tambien desde el servidor ---
+# Sin esto el servidor no dice en que codificacion van las paginas y
+# el navegador tiene que deducirlo del <meta charset> del HTML.
+# Con esto, las tildes y las eñes no dependen de esa deduccion.
+AddDefaultCharset UTF-8
+
 # --- Forzar https:// y dominio sin www ---
 <IfModule mod_rewrite.c>
   RewriteEngine On
