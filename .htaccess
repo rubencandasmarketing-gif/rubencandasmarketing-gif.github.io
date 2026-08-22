@@ -1,0 +1,46 @@
+# ============================================================
+#  rubencandas.com — configuracion del servidor
+# ============================================================
+#  Si algo dejara de funcionar tras subir este archivo,
+#  borralo desde el Administrador de archivos y la web
+#  volvera al estado anterior. No rompe nada de forma
+#  permanente.
+# ============================================================
+
+# --- Pagina de error propia (la del adolescente sin wifi) ---
+ErrorDocument 404 /404.html
+
+# --- Forzar https:// y dominio sin www ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Nunca redirigir la carpeta de validacion del certificado SSL
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+
+  # Si entra sin cifrar, o entra por www, mandamos a la version buena
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://rubencandas.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Comprimir el texto para que la web cargue mas rapido ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Guardar en cache las imagenes y tipografias del visitante ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg  "access plus 1 year"
+  ExpiresByType image/png   "access plus 1 year"
+  ExpiresByType image/webp  "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  # El HTML no se cachea: asi los cambios se ven al momento
+  ExpiresByType text/html   "access plus 0 seconds"
+</IfModule>
+
+# --- No enseñar el listado de archivos de las carpetas ---
+Options -Indexes
