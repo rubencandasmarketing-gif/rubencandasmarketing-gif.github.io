@@ -29,6 +29,28 @@ AddDefaultCharset UTF-8
   RewriteRule ^ https://rubencandas.com%{REQUEST_URI} [L,R=301]
 </IfModule>
 
+# --- Cabeceras de seguridad ---
+<IfModule mod_headers.c>
+  # Impide que otra web meta la tuya dentro de un marco invisible
+  # y confunda a tus visitantes superponiendo botones (clickjacking).
+  Header always set X-Frame-Options "DENY"
+
+  # Impide que el navegador "adivine" el tipo de un archivo y acabe
+  # ejecutando como codigo algo que se hace pasar por imagen.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Al salir hacia otra web solo se envia el dominio, no la pagina exacta.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Declara que esta web no usa camara, microfono ni ubicacion.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Lista blanca de lo que la web puede cargar o contactar.
+  # 'unsafe-inline' es necesario porque los estilos y scripts van dentro
+  # del propio HTML. Aun asi, bloquea cargar codigo de terceros.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+</IfModule>
+
 # --- Comprimir el texto para que la web cargue mas rapido ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
