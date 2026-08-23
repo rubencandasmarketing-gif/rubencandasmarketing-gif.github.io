@@ -31,6 +31,12 @@ AddDefaultCharset UTF-8
 
 # --- Cabeceras de seguridad ---
 <IfModule mod_headers.c>
+  # Obliga al navegador a usar siempre conexion cifrada con este dominio.
+  # OJO: el navegador MEMORIZA esta orden durante max-age segundos, aunque
+  # se quite esta linea. Empezamos con 1 dia (86400). Cuando lleve unas
+  # semanas sin incidencias, subir a 31536000 (un anio).
+  Header always set Strict-Transport-Security "max-age=86400"
+
   # Impide que otra web meta la tuya dentro de un marco invisible
   # y confunda a tus visitantes superponiendo botones (clickjacking).
   Header always set X-Frame-Options "DENY"
