@@ -1,0 +1,5 @@
+# Carpeta oculta de Tu Campaña Lista: que ningun buscador la indexe
+# ni siga sus enlaces (refuerza el <meta name="robots"> de cada pagina).
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
