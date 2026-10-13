@@ -87,7 +87,7 @@ main{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);padd
 .fld>label,.q>legend{display:block;font-weight:700;font-size:.98rem;margin-bottom:8px;line-height:1.35}
 .fld .opt-tag{font-weight:600;color:#5d6d69;font-size:.85rem}
 .fld input[type="text"],.fld input[type="tel"],.fld input[type="email"],.fld input[type="url"]{
-  width:100%;font-family:inherit;font-size:1.05rem;color:var(--ink);background:#fff;border:1.5px solid var(--field-line);border-radius:12px;
+  width:100%;font-family:inherit;font-size:1.05rem;color:var(--ink);background:#fff;border:1.5px solid var(--field-line);border-radius:var(--r);
   padding:13px 14px;min-height:52px;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
 .fld input::placeholder{color:#7d8a86}
 .fld input:focus{outline:none;border-color:var(--teal-deep);box-shadow:0 0 0 4px rgba(91,189,181,.35)}
@@ -95,8 +95,8 @@ main{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);padd
 .q>legend{float:left;width:100%}
 .q>legend+*{clear:both}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
-.opt{position:relative;display:flex;align-items:center;gap:11px;min-height:52px;padding:12px 14px;background:#fff;border:1.5px solid var(--field-line);border-radius:12px;
-  cursor:pointer;font-weight:600;line-height:1.25;transition:border-color .2s var(--ease),background .2s var(--ease)}
+.opt{position:relative;display:flex;align-items:center;gap:11px;min-height:52px;padding:12px 14px;background:#fff;border:1.5px solid var(--field-line);border-radius:var(--r);
+  cursor:pointer;font-weight:600;line-height:1.25;-webkit-user-select:none;user-select:none;transition:border-color .2s var(--ease),background .2s var(--ease)}
 .opt:hover{border-color:var(--teal-deep)}
 .opt input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--teal-deep);cursor:pointer}
 .opt:has(input:checked){border-color:var(--teal-deep);background:var(--teal-soft)}
@@ -120,6 +120,22 @@ main{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);padd
 .msg p{color:#cdd8d4}
 .msg a{color:var(--teal);font-weight:700;text-decoration:underline}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.draft-note{display:flex;align-items:center;gap:8px}
+.draft-note svg{width:16px;height:16px;flex:none;color:var(--teal-ink)}
+
+/* Barra de progreso (solo con JS) */
+.progress{position:sticky;top:0;z-index:50;margin:-40px 0 30px;background:rgba(245,242,234,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--paper-2)}
+.progress .wrap{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+.progress-track{flex:1;height:6px;border-radius:var(--r-full);background:var(--paper-2);overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--teal-deep);border-radius:inherit;transition:width .35s var(--ease)}
+.progress-txt{font-size:.82rem;font-weight:700;color:#4a5b57;white-space:nowrap;font-variant-numeric:tabular-nums}
+.progress.full .progress-fill{background:var(--teal)}
+
+/* Errores: solo despues de intentar enviar */
+.fld,.q,.check{scroll-margin-top:84px}
+.tried .fld input:invalid{border-color:var(--bolt)}
+.tried .q:has(input:invalid) .opt{border-color:rgba(232,64,47,.7)}
+.tried .check:has(input:invalid) input{outline:2px solid var(--bolt);outline-offset:2px}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -162,6 +178,12 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
 </header>
 
 <main id="alta" tabindex="-1">
+  <div class="progress" id="alta-progress" hidden>
+    <div class="wrap">
+      <div class="progress-track" aria-hidden="true"><div class="progress-fill"></div></div>
+      <span class="progress-txt" role="status" aria-live="polite"></span>
+    </div>
+  </div>
   <div class="wrap">
     <div class="msg" id="alta-msg" role="alert" hidden></div>
 
@@ -170,6 +192,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
       <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <p class="hint">Los campos con <span class="req" aria-hidden="true">*</span><span class="hp">asterisco</span> son obligatorios.</p>
+      <p class="hint draft-note" id="draft-note" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Tus respuestas se guardan en este dispositivo hasta que envíes el alta. Si sales, las encontrarás al volver.</p>
 
       <fieldset class="blk">
         <legend><span class="hx">01</span>Sobre ti</legend>
@@ -288,7 +311,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
             <label class="opt"><input type="radio" name="presupuesto_diario" value="Otro">Otro</label>
           </div>
         </fieldset>
-        <label class="check"><input type="checkbox" name="condiciones" value="Sí" required><span>He leído las condiciones de Tu Campaña Lista y entiendo que el gasto publicitario lo pago yo directamente a Meta, con mi tarjeta. <span class="req" aria-hidden="true">*</span></span></label>
+        <label class="check"><input type="checkbox" name="condiciones" value="Sí" required><span>He leído las <a href="condiciones.html" target="_blank" rel="noopener">condiciones de Tu Campaña Lista</a> y entiendo que el gasto publicitario lo pago yo directamente a Meta, con mi tarjeta. <span class="req" aria-hidden="true">*</span></span></label>
         <label class="check"><input type="checkbox" name="privacidad" value="Sí" required><span>Acepto el tratamiento de mis datos para gestionar el alta en el servicio, según la <a href="../politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>. <span class="req" aria-hidden="true">*</span></span></label>
       </fieldset>
 
@@ -354,13 +377,80 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     });
   }
   form.addEventListener('change',updateConds);
+
+  // Borrador: las respuestas se guardan en el dispositivo hasta enviar el alta,
+  // por si el cliente sale a mirar su pagina de Facebook y vuelve
+  var KEY='tcl-alta-borrador', SKIP={_subject:1,_gotcha:1};
+  function store(){try{return window.localStorage;}catch(e){return null;}}
+  function saveDraft(){
+    var ls=store();if(!ls)return;
+    var data={};
+    [].forEach.call(form.elements,function(el){
+      if(!el.name||SKIP[el.name]||el.type==='submit')return;
+      if(el.type==='radio'){if(el.checked)data[el.name]=el.value;}
+      else if(el.type==='checkbox')data[el.name]=el.checked;
+      else if(el.value)data[el.name]=el.value;
+    });
+    try{ls.setItem(KEY,JSON.stringify(data));}catch(e){}
+  }
+  function loadDraft(){
+    var ls=store(),data=null;
+    try{data=ls&&JSON.parse(ls.getItem(KEY)||'null');}catch(e){}
+    if(!data)return;
+    [].forEach.call(form.elements,function(el){
+      if(!el.name||!(el.name in data)||SKIP[el.name])return;
+      if(el.type==='radio')el.checked=(el.value===data[el.name]);
+      else if(el.type==='checkbox')el.checked=!!data[el.name];
+      else el.value=data[el.name];
+    });
+  }
+  function clearDraft(){var ls=store();try{ls&&ls.removeItem(KEY);}catch(e){}}
+  loadDraft();
+  if(store())document.getElementById('draft-note').hidden=false;
+  form.addEventListener('input',saveDraft);
+  form.addEventListener('change',saveDraft);
+
+  // Enlace con ?ref=Nombre (lo comparte quien recomienda el servicio): rellena el campo
+  var ref=new URLSearchParams(location.search).get('ref');
+  var refEl=form.querySelector('[name="referido"]');
+  if(ref&&!refEl.value)refEl.value=ref.slice(0,80);
+
   updateConds();
+
+  // Barra de progreso sobre las preguntas obligatorias
+  var prog=document.getElementById('alta-progress');
+  var fill=prog.querySelector('.progress-fill'), txt=prog.querySelector('.progress-txt');
+  var reqNames=[];
+  form.querySelectorAll('[required]').forEach(function(el){if(reqNames.indexOf(el.name)<0)reqNames.push(el.name);});
+  function updateProgress(){
+    var done=reqNames.filter(function(n){
+      var els=form.querySelectorAll('[name="'+n+'"]');
+      return [].some.call(els,function(el){
+        if(el.type==='radio'||el.type==='checkbox')return el.checked;
+        return el.value.trim()&&el.validity.valid;
+      });
+    }).length;
+    fill.style.width=Math.round(done/reqNames.length*100)+'%';
+    txt.textContent=done===reqNames.length?'¡Todo listo para enviar!':done+' de '+reqNames.length+' respondidas';
+    prog.classList.toggle('full',done===reqNames.length);
+  }
+  prog.hidden=false;
+  form.addEventListener('input',updateProgress);
+  form.addEventListener('change',updateProgress);
+  updateProgress();
 
   // Enlace de Facebook sin https:// -> se completa para que no lo rechace la validacion
   var fb=form.querySelector('[name="pagina_facebook_url"]');
   fb.addEventListener('blur',function(){
     var v=fb.value.trim();
     if(v&&!/^https?:\/\//i.test(v))fb.value='https://'+v.replace(/^\/+/,'');
+  });
+
+  // Usuario de Instagram: si pegan el enlace del perfil, se queda solo el @usuario
+  var ig=form.querySelector('[name="instagram_usuario"]');
+  ig.addEventListener('blur',function(){
+    var v=ig.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/[/?#].*$/,'').replace(/^@+/,'');
+    ig.value=v?'@'+v:'';
   });
 
   // Mensajes de validacion en espanol, sea cual sea el idioma del navegador
@@ -377,6 +467,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     return '';
   }
   form.addEventListener('invalid',function(e){
+    form.classList.add('tried');
     var el=e.target;el.setCustomValidity('');
     if(!el.validity.valid)el.setCustomValidity(message(el));
   },true);
@@ -394,7 +485,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
   var subj=form.querySelector('[name="_subject"]');
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(!form.checkValidity()){form.reportValidity();return;}
+    if(!form.checkValidity()){form.classList.add('tried');form.reportValidity();return;}
     var nombre=form.querySelector('[name="nombre"]').value.trim();
     subj.value='Nueva alta Tu Campaña Lista · '+nombre;
     var label=btn.innerHTML;
@@ -403,6 +494,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
       .then(function(res){
         if(!res.ok)throw new Error('bad response');
+        clearDraft();
         window.location.href='gracias.html';
       })
       .catch(function(){

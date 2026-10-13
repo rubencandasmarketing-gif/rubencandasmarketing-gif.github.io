@@ -26,7 +26,14 @@ de nutricion y bienestar.
   validacion en espanol por JS. Si el envio falla, muestra el WhatsApp 664 290 852.
 - `tucampanalista/gracias.html` — destino tras un envio correcto (redireccion por JS).
   Boton a `https://wa.me/34664290852`.
+- `tucampanalista/condiciones.html` — condiciones del servicio. **BORRADOR**: lleva un
+  aviso amarillo y huecos `<mark class="pend">`; quitarlos todos antes de publicar.
 - `tucampanalista/.htaccess` — `X-Robots-Tag: noindex, nofollow` para toda la carpeta.
+
+Extras del formulario: barra de progreso (preguntas obligatorias), borrador en
+`localStorage` (`tcl-alta-borrador`, se borra al enviar bien), errores en rojo
+solo tras intentar enviar, `?ref=Nombre` rellena "¿Quien te ha hablado...?",
+el usuario de Instagram se limpia si pegan el enlace del perfil.
 
 Requisitos de ocultacion (mantenerlos en cualquier pagina nueva de la carpeta):
 `<meta name="robots" content="noindex, nofollow">`, fuera de `sitemap.xml`,
@@ -40,5 +47,8 @@ clientes y la comunicacion por telefono/WhatsApp.
 
 - Guia de alta (misma carpeta).
 - Instrucciones de grabacion del video (misma carpeta).
-- Pagina de condiciones del servicio: la casilla "He leido las condiciones de
-  Tu Campaña Lista" todavia no enlaza a ningun sitio.
+- Completar `condiciones.html`: precios, impuestos y forma de pago, permanencia
+  y baja, frecuencia de seguimiento, y que politica de privacidad usan los
+  formularios de contacto de Meta del cliente.
+- El repositorio de GitHub es publico: la rama `feat/tucampanalista-alta` no se
+  ha subido para no revelar la carpeta. Hacer el repo privado antes de subirla.
