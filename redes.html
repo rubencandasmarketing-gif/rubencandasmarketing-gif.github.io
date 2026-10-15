@@ -386,6 +386,17 @@ body::before{
 .cform-msg h3{font-family:'Roboto Slab',serif;font-weight:900;font-size:1.4rem;color:var(--paper);margin:0 0 10px}
 .cform-msg p{color:#cdd8d4;font-size:1.02rem;line-height:1.55;margin:0}
 .cform-msg a{color:var(--teal);text-decoration:underline;font-weight:700}
+.cform .cform-help{margin-top:6px;font-size:.85rem;font-weight:600;color:#123f3a}
+.cform .cform-info{margin-top:14px;padding-left:12px;border-left:3px solid var(--ink);font-size:.92rem;font-weight:700;line-height:1.45;color:var(--ink)}
+.cform .cform-note{margin-top:14px;border:2px solid var(--bolt);border-radius:var(--r);padding:14px 16px;font-size:.95rem;font-weight:600;line-height:1.5;color:var(--ink)}
+.cform .cform-note p{margin:0}
+.cform .cform-note-actions{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:10px}
+.cform .cform-note button{width:auto;margin:0;padding:4px 0;background:none;border:0;border-radius:0;color:var(--ink);font-family:inherit;font-weight:800;font-size:.95rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;box-shadow:none;transform:none;transition:opacity .2s var(--ease)}
+.cform .cform-note button:hover{opacity:.7;transform:none;box-shadow:none}
+.cform .cform-radio{border:0;margin:0;padding:0;min-width:0}
+.cform .cform-radio legend{display:block;margin:16px 0 6px;padding:0;font-weight:700;font-size:.9rem;color:var(--ink)}
+.cform .cform-radio label{display:flex;align-items:center;gap:11px;margin:0;padding:7px 0;font-weight:600;font-size:1rem;cursor:pointer}
+.cform .cform-radio input{width:20px;height:20px;flex:none;margin:0;padding:0;accent-color:var(--ink);cursor:pointer}
 /* --- FAQ (acordeón) --- */
 .faq-list{max-width:820px;margin:36px auto 0}
 .faq-item{border:1px solid rgba(16,31,28,.14);border-radius:var(--r);margin-bottom:12px;background:var(--paper-2);overflow:hidden;transition:border-color .2s var(--ease)}
@@ -649,46 +660,74 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <label for="cf-nombre">Nombre <span class="req">*</span></label>
     <input type="text" id="cf-nombre" name="nombre" autocomplete="name" required>
 
+    <label for="cf-negocio">Tu negocio y a qué se dedica <span class="req">*</span></label>
+    <input type="text" id="cf-negocio" name="negocio" autocomplete="organization" placeholder="Fisioterapia en Gijón, tienda de ropa en Oviedo…" required>
+
     <label for="cf-email">Email <span class="req">*</span></label>
     <input type="email" id="cf-email" name="email" autocomplete="email" required>
 
-    <label for="cf-perfiles">Perfiles en RRSS</label>
-    <input type="text" id="cf-perfiles" name="perfiles_rrss" placeholder="Enlace o usuario de tu Instagram, Facebook...">
+    <label for="cf-telefono">Teléfono <span class="req">*</span></label>
+    <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel" inputmode="tel" pattern="\+?[0-9]( ?[0-9]){8,14}" title="Un número de teléfono, con o sin prefijo" aria-describedby="cf-telefono-help" required>
+    <p class="cform-help" id="cf-telefono-help">Para escribirte por WhatsApp o llamarte, no para darte la chapa.</p>
 
-    <label for="cf-servicio">¿Qué servicio te interesa? <span class="req">*</span></label>
+    <label for="cf-perfiles">Tu perfil principal en RRSS <span class="req">*</span></label>
+    <input type="text" id="cf-perfiles" name="perfiles_rrss" placeholder="@tunegocio, el enlace, o escribe «empiezo de cero»" required>
+
+    <label for="cf-servicio">¿Qué necesitas? <span class="req">*</span></label>
     <select id="cf-servicio" name="servicio" required>
       <option value="" disabled selected>Elige una opción</option>
-      <option value="Gestión de RRSS">Gestión de RRSS</option>
-      <option value="Asesoría">Asesoría</option>
-      <option value="Mentoría">Mentoría</option>
-      <option value="Cobertura de eventos">Cobertura de eventos</option>
+      <option value="Gestión de RRSS">Que lleves tú mis redes (gestión mensual)</option>
+      <option value="Mentoría">Llevarlas yo, pero con tu apoyo (mentoría)</option>
+      <option value="Asesoría">Una sesión para poner orden (asesoría puntual)</option>
+      <option value="Cobertura de eventos">Cubrir un evento concreto</option>
+      <option value="No lo tengo claro">No lo tengo claro, dime tú</option>
     </select>
 
     <div class="fld-block" data-service="Gestión de RRSS" hidden>
-      <label for="cf-presupuesto">Presupuesto aproximado <span class="req">*</span></label>
+      <p class="cform-info">La gestión mensual arranca en 300 €/mes, con un compromiso mínimo de 4 meses.</p>
+      <label for="cf-presupuesto">Presupuesto mensual aproximado <span class="req">*</span></label>
       <select id="cf-presupuesto" name="presupuesto" required disabled>
         <option value="" disabled selected>Elige una opción</option>
-        <option value="250 – 350 €/mes">250 – 350 €/mes</option>
-        <option value="350 – 500 €/mes">350 – 500 €/mes</option>
+        <option value="Menos de 300 €/mes">Menos de 300 €/mes</option>
+        <option value="300 – 500 €/mes">300 – 500 €/mes</option>
         <option value="Más de 500 €/mes">Más de 500 €/mes</option>
-        <option value="No lo tengo claro / quiero que me asesores">No lo tengo claro / quiero que me asesores</option>
+        <option value="No lo tengo claro">No lo tengo claro</option>
       </select>
+      <div class="cform-note" id="cf-nota-presupuesto" role="status" hidden>
+        <p>Te lo digo ya para no hacerte perder el tiempo: la gestión mensual arranca en 300 €/mes. Con menos presupuesto, lo que te encaja es la mentoría (las llevas tú, con mi apoyo, 175 €/mes) o una asesoría puntual (150 €).</p>
+        <div class="cform-note-actions">
+          <button type="button" data-switch="Mentoría">Cambiar a mentoría</button>
+          <button type="button" data-switch="Asesoría">Cambiar a asesoría</button>
+        </div>
+      </div>
       <label for="cf-problema-g">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
       <textarea id="cf-problema-g" name="problema_rrss" required disabled></textarea>
     </div>
 
-    <div class="fld-block" data-service="Asesoría" hidden>
-      <label for="cf-problema-a">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
-      <textarea id="cf-problema-a" name="problema_rrss" required disabled></textarea>
-      <label for="cf-organiza-a">Cuéntame cómo te organizas para llevar las RRSS <span class="req">*</span></label>
-      <textarea id="cf-organiza-a" name="organizacion" required disabled></textarea>
-    </div>
-
     <div class="fld-block" data-service="Mentoría" hidden>
+      <p class="cform-info">La mentoría son 175 €/mes, con un compromiso mínimo de 3 meses.</p>
       <label for="cf-problema-m">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
       <textarea id="cf-problema-m" name="problema_rrss" required disabled></textarea>
-      <label for="cf-organiza-m">Cuéntame cómo te organizas para llevar las RRSS <span class="req">*</span></label>
-      <textarea id="cf-organiza-m" name="organizacion" required disabled></textarea>
+      <fieldset class="cform-radio">
+        <legend>¿Cómo las llevas ahora mismo? <span class="req">*</span></legend>
+        <label for="cf-sit-m-1"><input type="radio" id="cf-sit-m-1" name="situacion" value="Las llevo yo cuando puedo" required disabled>Las llevo yo cuando puedo</label>
+        <label for="cf-sit-m-2"><input type="radio" id="cf-sit-m-2" name="situacion" value="Las lleva otra persona" disabled>Las lleva otra persona</label>
+        <label for="cf-sit-m-3"><input type="radio" id="cf-sit-m-3" name="situacion" value="Llevo meses sin publicar" disabled>Llevo meses sin publicar</label>
+        <label for="cf-sit-m-4"><input type="radio" id="cf-sit-m-4" name="situacion" value="Empiezo de cero" disabled>Empiezo de cero</label>
+      </fieldset>
+    </div>
+
+    <div class="fld-block" data-service="Asesoría" hidden>
+      <p class="cform-info">La sesión son 150 €. Si después contratas la mentoría o la gestión, se descuentan del primer mes.</p>
+      <label for="cf-problema-a">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-problema-a" name="problema_rrss" required disabled></textarea>
+      <fieldset class="cform-radio">
+        <legend>¿Cómo las llevas ahora mismo? <span class="req">*</span></legend>
+        <label for="cf-sit-a-1"><input type="radio" id="cf-sit-a-1" name="situacion" value="Las llevo yo cuando puedo" required disabled>Las llevo yo cuando puedo</label>
+        <label for="cf-sit-a-2"><input type="radio" id="cf-sit-a-2" name="situacion" value="Las lleva otra persona" disabled>Las lleva otra persona</label>
+        <label for="cf-sit-a-3"><input type="radio" id="cf-sit-a-3" name="situacion" value="Llevo meses sin publicar" disabled>Llevo meses sin publicar</label>
+        <label for="cf-sit-a-4"><input type="radio" id="cf-sit-a-4" name="situacion" value="Empiezo de cero" disabled>Empiezo de cero</label>
+      </fieldset>
     </div>
 
     <div class="fld-block" data-service="Cobertura de eventos" hidden>
@@ -699,6 +738,25 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
       <label for="cf-objetivo">¿Qué objetivo tienes con las RRSS? <span class="req">*</span></label>
       <textarea id="cf-objetivo" name="objetivo_rrss" required disabled></textarea>
     </div>
+
+    <div class="fld-block" data-service="No lo tengo claro" hidden>
+      <label for="cf-problema-n">¿Cuál es tu principal problema con las RRSS? <span class="req">*</span></label>
+      <textarea id="cf-problema-n" name="problema_rrss" required disabled></textarea>
+      <fieldset class="cform-radio">
+        <legend>¿Cómo las llevas ahora mismo? <span class="req">*</span></legend>
+        <label for="cf-sit-n-1"><input type="radio" id="cf-sit-n-1" name="situacion" value="Las llevo yo cuando puedo" required disabled>Las llevo yo cuando puedo</label>
+        <label for="cf-sit-n-2"><input type="radio" id="cf-sit-n-2" name="situacion" value="Las lleva otra persona" disabled>Las lleva otra persona</label>
+        <label for="cf-sit-n-3"><input type="radio" id="cf-sit-n-3" name="situacion" value="Llevo meses sin publicar" disabled>Llevo meses sin publicar</label>
+        <label for="cf-sit-n-4"><input type="radio" id="cf-sit-n-4" name="situacion" value="Empiezo de cero" disabled>Empiezo de cero</label>
+      </fieldset>
+    </div>
+
+    <fieldset class="cform-radio">
+      <legend>¿Para cuándo lo necesitas? <span class="req">*</span></legend>
+      <label for="cf-plazo-1"><input type="radio" id="cf-plazo-1" name="plazo" value="Lo antes posible" required>Lo antes posible</label>
+      <label for="cf-plazo-2"><input type="radio" id="cf-plazo-2" name="plazo" value="En los próximos meses">En los próximos meses</label>
+      <label for="cf-plazo-3"><input type="radio" id="cf-plazo-3" name="plazo" value="Solo me estoy informando">Solo me estoy informando</label>
+    </fieldset>
 
     <label for="cf-mas">Algo más que quieras contarme</label>
     <textarea id="cf-mas" name="algo_mas"></textarea>
@@ -777,6 +835,16 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   var svc=form.querySelector('[name="servicio"]');
   var blocks=form.querySelectorAll('.fld-block');
   var subj=form.querySelector('[name="_subject"]');
+  var budget=form.querySelector('[name="presupuesto"]');
+  var note=document.getElementById('cf-nota-presupuesto');
+  function updateSubject(){
+    var val=svc.value;
+    if(val==='Gestión de RRSS'&&budget.value)subj.value='Nuevo contacto desde la web (Gestión · '+budget.value+')';
+    else subj.value=val?('Nuevo contacto desde la web ('+val+')'):'Nuevo contacto desde la web';
+  }
+  function updateNote(){
+    note.hidden=!(svc.value==='Gestión de RRSS'&&budget.value==='Menos de 300 €/mes');
+  }
   function update(){
     var val=svc.value;
     blocks.forEach(function(b){
@@ -784,9 +852,18 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       b.hidden=!on;
       b.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!on;});
     });
-    subj.value=val?('Nuevo contacto desde la web ('+val+')'):'Nuevo contacto desde la web';
+    updateSubject();updateNote();
   }
   svc.addEventListener('change',update);
+  budget.addEventListener('change',function(){updateSubject();updateNote();});
+  // "Cambiar a mentoria/asesoria": solo cambia el servicio; los campos fijos se conservan
+  note.querySelectorAll('[data-switch]').forEach(function(b){
+    b.addEventListener('click',function(){
+      svc.value=b.getAttribute('data-switch');
+      update();
+      svc.focus();
+    });
+  });
   update();
 
   var msg=document.getElementById('cform-msg');
@@ -806,7 +883,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       .then(function(res){
         if(!res.ok)throw new Error('bad response');
         form.hidden=true;
-        showMsg('ok','<h3>¡Gracias!</h3><p>He recibido tu mensaje y te contesto en cuanto pueda, como una persona, no como un bot.</p>');
+        showMsg('ok','<h3>¡Gracias!</h3><p>He recibido tu mensaje y te contesto en 48 h laborables, como una persona, no como un bot.</p>');
         form.reset();update();
       })
       .catch(function(){
