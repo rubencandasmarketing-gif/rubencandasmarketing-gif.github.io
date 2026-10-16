@@ -103,6 +103,9 @@ main{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);padd
 .opt:has(input:focus-visible){outline:3px solid var(--teal);outline-offset:2px}
 .opt input:focus-visible{outline:none}
 .cond{padding-left:14px;border-left:3px solid var(--teal-soft)}
+.opts.stack{grid-template-columns:1fr}
+.opt strong{font-weight:800}
+.opt-note{margin-top:10px;font-size:.85rem;font-weight:600;color:#4a5b57}
 .check{display:flex;align-items:flex-start;gap:12px;margin-top:18px;font-weight:600;font-size:.96rem;line-height:1.45;cursor:pointer}
 .check input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--teal-deep);cursor:pointer}
 .check a{color:var(--teal-ink);font-weight:800;text-decoration:underline}
@@ -168,7 +171,7 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <span class="brand-logo" role="img" aria-label="Rubén Candás"></span>
     <span class="eyebrow"><span class="line"></span>Tu Campaña Lista</span>
     <h1>Formulario de alta</h1>
-    <p class="sub">Rellena esto en dos minutos. Con tus respuestas preparo tu guía de alta y el guion de tu vídeo. En menos de 24 h te escribo por WhatsApp con el siguiente paso.</p>
+    <p class="sub">Rellena esto en dos minutos. Con tus respuestas preparo tu alta y el guion de tu vídeo. En menos de 24 h te escribo por WhatsApp para confirmar tu plan y darte el siguiente paso.</p>
     <ol class="steps" aria-label="Cómo funciona">
       <li><span class="n" aria-hidden="true">1</span>Rellenas el formulario</li>
       <li><span class="n" aria-hidden="true">2</span>Recibes la guía de alta y el guion</li>
@@ -297,10 +300,11 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
         <legend><span class="hx">04</span>Plan</legend>
         <fieldset class="fld q">
           <legend>Plan elegido <span class="req" aria-hidden="true">*</span></legend>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="plan" value="Arranque + mes a mes" required>Arranque + mes a mes</label>
-            <label class="opt"><input type="radio" name="plan" value="Pack 3 meses">Pack 3 meses</label>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="plan" value="Arranque + mes a mes" required><span><strong>Arranque + mes a mes</strong> · 80&nbsp;€&nbsp;+&nbsp;IVA de arranque y 40&nbsp;€&nbsp;+&nbsp;IVA al mes</span></label>
+            <label class="opt"><input type="radio" name="plan" value="Pack 3 meses"><span><strong>Pack 3 meses</strong> · 169&nbsp;€&nbsp;+&nbsp;IVA (arranque + 3 meses de soporte)</span></label>
           </div>
+          <p class="opt-note">Precio de lanzamiento para altas de noviembre y diciembre. Sin permanencia.</p>
         </fieldset>
         <fieldset class="fld q">
           <legend>Presupuesto diario que vas a poner en Meta <span class="req" aria-hidden="true">*</span></legend>
