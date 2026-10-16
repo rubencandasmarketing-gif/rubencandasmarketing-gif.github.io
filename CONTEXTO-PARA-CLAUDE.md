@@ -26,8 +26,7 @@ de nutricion y bienestar.
   validacion en espanol por JS. Si el envio falla, muestra el WhatsApp 664 290 852.
 - `tucampanalista/gracias.html` — destino tras un envio correcto (redireccion por JS).
   Boton a `https://wa.me/34664290852`.
-- `tucampanalista/condiciones.html` — condiciones del servicio. **BORRADOR**: lleva un
-  aviso amarillo y huecos `<mark class="pend">`; quitarlos todos antes de publicar.
+- `tucampanalista/condiciones.html` — condiciones en version corta (precios destacados y 7 tarjetas: servicio, pago, gasto en Meta, baja, resultados, normas de Meta, datos). El detalle del servicio va en el PDF que se envia por WhatsApp; no ampliar esta pagina.
 - `tucampanalista/.htaccess` — `X-Robots-Tag: noindex, nofollow` para toda la carpeta.
 
 Extras del formulario: barra de progreso (preguntas obligatorias), borrador en
@@ -47,8 +46,5 @@ clientes y la comunicacion por telefono/WhatsApp.
 
 - Guia de alta (misma carpeta).
 - Instrucciones de grabacion del video (misma carpeta).
-- Completar `condiciones.html`: precios, impuestos y forma de pago, permanencia
-  y baja, frecuencia de seguimiento, y que politica de privacidad usan los
-  formularios de contacto de Meta del cliente.
 - El repositorio de GitHub es publico: la rama `feat/tucampanalista-alta` no se
   ha subido para no revelar la carpeta. Hacer el repo privado antes de subirla.

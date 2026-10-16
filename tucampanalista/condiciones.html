@@ -62,16 +62,50 @@ body::before{
 .eyebrow .line{width:34px;height:2px;background:var(--teal)}
 .hero h1{font-size:var(--step-3);font-weight:900}
 .hero .sub{margin-top:18px;max-width:52ch;font-size:var(--step-0);color:#cdd8d4;font-weight:500}
-@media(max-width:640px){
-/* ---------- TEXTO LEGAL ---------- */
-.legal{max-width:760px;margin:0 auto;padding:48px 20px 88px}
-.legal h2{font-size:1.4rem;margin:40px 0 12px;line-height:1.2}
-.legal p,.legal li{color:#394945;font-size:1.02rem;line-height:1.72}
-.legal p{margin:0 0 14px;max-width:65ch}
-.legal ul{margin:0 0 16px;padding-left:22px}
-.legal li{margin-bottom:8px}
-.legal a{color:var(--teal-ink);text-decoration:underline}
-.legal .updated{font-size:.9rem;color:#5d6d69}
+/* ---------- CONDICIONES (version corta) ---------- */
+main{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);padding:48px 0 88px}
+.updated{font-size:.88rem;font-weight:600;color:#5d6d69;margin-bottom:22px}
+
+/* Precios destacados */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.plan{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:22px 22px 20px;box-shadow:var(--shadow-md)}
+.plan-name{font-weight:800;font-size:.95rem;color:var(--teal)}
+.plan-price{font-family:'Roboto Slab',serif;font-weight:900;font-size:clamp(1.9rem,1.5rem + 1.6vw,2.4rem);line-height:1;margin-top:10px;letter-spacing:-.01em}
+.plan-price small{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;color:#cdd8d4;letter-spacing:0}
+.plan-detail{margin-top:10px;color:#cdd8d4;font-size:.93rem;line-height:1.5}
+.plan-detail b{color:var(--paper)}
+.plans-note{font-size:.86rem;font-weight:600;color:#4a5b57;line-height:1.5;margin-bottom:34px}
+@media(max-width:600px){.plans{grid-template-columns:1fr}}
+
+/* Tarjetas numeradas */
+.terms{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;counter-reset:t}
+.term{position:relative;background:#fffdf8;border:1.5px solid var(--paper-2);border-radius:var(--r);padding:20px 20px 22px 66px;box-shadow:0 1px 2px rgba(6,20,18,.05);counter-increment:t}
+.term::before{content:counter(t,decimal-leading-zero);position:absolute;left:20px;top:20px;width:32px;height:32px;border-radius:50%;background:var(--teal-soft);color:var(--teal-ink);
+  display:flex;align-items:center;justify-content:center;font-family:'Roboto Slab',serif;font-weight:900;font-size:.8rem}
+.term.wide{grid-column:1/-1}
+.term h2{font-size:1.12rem;font-weight:700;line-height:1.25;margin-bottom:6px;padding-top:5px}
+.term p{color:#394945;font-size:.97rem;line-height:1.6}
+.term p+p{margin-top:8px}
+.term b{color:var(--ink)}
+.term a{color:var(--teal-ink);font-weight:700;text-decoration:underline}
+@media(max-width:700px){
+  .terms{grid-template-columns:1fr}
+  .term{padding:16px 18px 20px}
+  .term::before{left:18px;top:16px}
+  .term h2{display:flex;align-items:center;min-height:32px;padding:0 0 0 44px;margin-bottom:8px}
+}
+
+/* Cierre */
+.more{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;margin-top:34px;padding:22px 24px;background:var(--ink);color:var(--paper);border-radius:var(--r)}
+.more p{font-weight:600;color:#cdd8d4;max-width:46ch;line-height:1.5}
+.more p b{color:var(--paper)}
+.more a{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--ink);text-decoration:none;font-weight:800;padding:13px 22px;border-radius:var(--r-full);
+  transition:transform .3s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease)}
+.more a svg{width:20px;height:20px;flex:none}
+.more a:hover{transform:translateY(-3px);background:var(--teal-soft);box-shadow:var(--shadow-lg)}
+.more a:active{transform:translateY(-1px)}
+.more a:focus-visible{outline-color:var(--paper)}
+@media(max-width:480px){.more a{width:100%;justify-content:center}}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92rem}
@@ -104,69 +138,65 @@ footer{background:var(--ink);color:#8fa39d;padding:56px 26px 28px;font-size:.92r
     <span class="brand-logo" role="img" aria-label="Rubén Candás"></span>
     <span class="eyebrow"><span class="line"></span>Tu Campaña Lista</span>
     <h1>Condiciones del servicio</h1>
-    <p class="sub">Qué incluye, qué necesito de ti, cuánto cuesta y cómo funciona el gasto en anuncios. Léelas antes de enviar el alta.</p>
+    <p class="sub">Lo esencial antes de darte de alta. El detalle de todo lo que incluye tu plan te lo envío en PDF por WhatsApp cuando lo confirmemos.</p>
   </div>
 </header>
 
-<main class="legal" id="condiciones" tabindex="-1">
-<p class="updated">Última actualización: Octubre de 2026</p>
+<main id="condiciones" tabindex="-1">
+  <div class="wrap">
+    <p class="updated">Última actualización: Octubre de 2026</p>
 
-<h2>1. Qué es Tu Campaña Lista</h2>
-<p>Es un servicio para distribuidores independientes de nutrición y bienestar: preparo y pongo en marcha una campaña de anuncios en Instagram y Facebook (Meta) para que personas de tu zona se interesen por lo que ofreces y te dejen sus datos de contacto.</p>
+    <div class="plans" role="list" aria-label="Planes y precio">
+      <div class="plan" role="listitem">
+        <p class="plan-name">Arranque + mes a mes</p>
+        <p class="plan-price">80&nbsp;€ <small>+ IVA de arranque</small></p>
+        <p class="plan-detail">Pago único (96,80&nbsp;€ con IVA). Después, <b>40&nbsp;€&nbsp;+&nbsp;IVA al mes</b> de soporte (48,40&nbsp;€ con IVA).</p>
+      </div>
+      <div class="plan" role="listitem">
+        <p class="plan-name">Pack 3 meses</p>
+        <p class="plan-price">169&nbsp;€ <small>+ IVA</small></p>
+        <p class="plan-detail">Pago único (204,49&nbsp;€ con IVA). <b>Incluye el arranque y tres meses de soporte.</b> Después, 40&nbsp;€&nbsp;+&nbsp;IVA al mes.</p>
+      </div>
+    </div>
+    <p class="plans-note">Precios de lanzamiento para altas de noviembre y diciembre de 2026. Todos los precios son sin IVA; entre paréntesis, el total con IVA.</p>
 
-<h2>2. Qué incluye</h2>
-<ul>
-  <li>Una <strong>guía de alta</strong> con los pasos para preparar tu página y tu cuenta publicitaria.</li>
-  <li>El <strong>guion de tu vídeo</strong>, adaptado a tu oferta y a tu zona, con instrucciones para grabarlo con el móvil.</li>
-  <li>La <strong>edición completa de tu vídeo</strong>: gancho inicial, subtítulos, imágenes de recurso y versiones para reels y para feed. Una imagen de apoyo como segundo anuncio.</li>
-  <li>El <strong>montaje de la campaña</strong>: configuración, público de tu zona, anuncios y formulario de contacto, dejada activa.</li>
-  <li><strong>Soporte mensual</strong>: dos informes al mes (cada 15 días) con recomendaciones, los ajustes de presupuesto, público, anuncios y formulario que salgan de ellos, un vídeo nuevo editado al mes (tú grabas, yo edito) y consultas por WhatsApp con respuesta en 48 horas.</li>
-</ul>
-<p><strong>Qué no incluye:</strong> responder a los contactos y cerrar las ventas, la gestión de tu Instagram o Facebook, y el gasto publicitario (ver punto 5). Una campaña nueva con otro objetivo (otro producto u otro público) se monta aparte por 50&nbsp;€&nbsp;+&nbsp;IVA, con su vídeo editado.</p>
+    <ol class="terms">
+      <li class="term wide">
+        <h2>El servicio</h2>
+        <p>Preparo y monto tu campaña de anuncios en Instagram y Facebook (Meta) para captar contactos en tu zona, y la acompaño con soporte mensual. El detalle de lo que incluye cada plan es el del PDF que te envío al confirmarlo.</p>
+      </li>
+      <li class="term">
+        <h2>Pago</h2>
+        <p>Por transferencia bancaria o Bizum. El arranque o el pack, antes de empezar. El soporte mensual, entre el día 1 y el 5 de cada mes.</p>
+      </li>
+      <li class="term">
+        <h2>El gasto en anuncios lo pagas tú</h2>
+        <p>No está incluido en el precio. Lo pagas directamente a Meta, con tu tarjeta y desde tu cuenta publicitaria; nunca pasa por mí. Tú decides el presupuesto y puedes cambiarlo o pausarlo cuando quieras.</p>
+      </li>
+      <li class="term">
+        <h2>Baja</h2>
+        <p><b>Mes a mes:</b> sin permanencia, avisando con 15 días.</p>
+        <p><b>Pack 3 meses:</b> se paga por adelantado y, una vez montada la campaña, no se devuelve. Al terminar pasa a mes a mes, sin permanencia.</p>
+      </li>
+      <li class="term">
+        <h2>Resultados</h2>
+        <p>No puedo garantizar un número de contactos ni de ventas: dependen de tu oferta, tu zona, tu presupuesto, tu vídeo y de cómo atiendas a quien te escriba.</p>
+      </li>
+      <li class="term">
+        <h2>Normas de Meta</h2>
+        <p>Los anuncios cumplen las políticas de Meta, muy estrictas con la salud y la nutrición. Tú respondes de que lo que ofreces sea veraz. Si Meta rechaza un anuncio, te ayudo a corregirlo, pero esa decisión es suya.</p>
+      </li>
+      <li class="term">
+        <h2>Datos y privacidad</h2>
+        <p>Los contactos que lleguen son tuyos. La política de privacidad que exigen los formularios de Meta te la preparo yo. Tus datos como cliente se tratan según la <a href="../politica-privacidad.html">política de privacidad</a> de esta web.</p>
+      </li>
+    </ol>
 
-<h2>3. Qué necesito de ti</h2>
-<ul>
-  <li>Rellenar el formulario de alta con datos correctos.</li>
-  <li>Seguir la guía de alta y darme los accesos que se indican en ella.</li>
-  <li>Grabar el vídeo siguiendo el guion.</li>
-  <li>Tener una tarjeta de pago añadida en tu cuenta publicitaria de Meta.</li>
-  <li>Atender los contactos que lleguen lo antes posible: la rapidez en responder es lo que más influye en convertirlos en clientes.</li>
-</ul>
-
-<h2>4. Planes y precio</h2>
-<ul>
-  <li><strong>Arranque + mes a mes:</strong> 80&nbsp;€&nbsp;+&nbsp;IVA (96,80&nbsp;€) de arranque, pago único, y 40&nbsp;€&nbsp;+&nbsp;IVA (48,40&nbsp;€) al mes de soporte.</li>
-  <li><strong>Pack 3 meses:</strong> 169&nbsp;€&nbsp;+&nbsp;IVA (204,49&nbsp;€), pago único. Incluye el arranque y tres meses de soporte. Al terminar, pasa a 40&nbsp;€&nbsp;+&nbsp;IVA al mes sin permanencia.</li>
-</ul>
-<p>Precio de lanzamiento válido para altas realizadas en noviembre y diciembre de 2026 (precio normal: 100&nbsp;€ de arranque, 45&nbsp;€ al mes y 199&nbsp;€ el pack, más IVA). Quien se dé de alta en ese plazo mantiene su cuota de soporte durante 12 meses. Todos los precios son sin IVA; entre paréntesis, el total IVA incluido. Pago por transferencia bancaria o Bizum: el arranque o el pack antes de empezar, y el soporte mensual entre el día 1 y el 5 de cada mes.</p>
-
-<h2>5. El gasto en anuncios lo pagas tú, directamente a Meta</h2>
-<p>El presupuesto de los anuncios <strong>no está incluido</strong> en el precio del servicio. Lo pagas tú directamente a Meta, con tu tarjeta, desde tu propia cuenta publicitaria. Meta te cobra y te factura a ti, y en ningún momento ese dinero pasa por mí.</p>
-<p>Tú eliges el presupuesto diario (por ejemplo, entre 3&nbsp;€ y 5&nbsp;€ al día) y puedes cambiarlo o pausar los anuncios cuando quieras.</p>
-
-<h2>6. Duración y baja</h2>
-<ul>
-  <li><strong>Mes a mes:</strong> sin permanencia. Se cancela avisando con 15 días.</li>
-  <li><strong>Pack 3 meses:</strong> se paga por adelantado y cubre tres meses de soporte. Una vez montada la campaña no se devuelve el importe. Al terminar, pasa a mes a mes sin permanencia.</li>
-  <li>Si un mes tu gasto en Meta no llega a 40&nbsp;€, ese mes no se cobra el soporte.</li>
-  <li>Al darte de baja, la campaña se queda en tu cuenta publicitaria, activa o pausada como tú decidas; yo retiro mi acceso y dejo de hacer informes y ajustes.</li>
-  <li>Si lo dejas más de dos meses y quieres volver, la reactivación cuesta una mensualidad (40&nbsp;€&nbsp;+&nbsp;IVA): reviso y reajusto la campaña.</li>
-</ul>
-
-<h2>7. Resultados</h2>
-<p>Preparo cada campaña para que funcione lo mejor posible, pero no puedo garantizar un número concreto de contactos ni de ventas: dependen de tu oferta, tu zona, tu presupuesto, el vídeo y de cómo atiendas a quienes te escriban, además del funcionamiento de la propia plataforma de Meta.</p>
-
-<h2>8. Normas de publicidad de Meta</h2>
-<p>Los anuncios tienen que cumplir las políticas de publicidad de Meta, que son especialmente estrictas con la salud, la nutrición y el control de peso. Por ejemplo, no se admiten imágenes de «antes y después», promesas de resultados garantizados ni mensajes que aludan a características personales de quien ve el anuncio.</p>
-<p>Escribiré el guion y el anuncio dentro de esas normas. Tú eres responsable de que lo que ofreces sea veraz y de cumplir también las normas de tu empresa o marca. Meta puede rechazar un anuncio o limitar una cuenta por decisión propia; si ocurre, te ayudo a corregirlo, pero esa decisión no depende de mí.</p>
-
-<h2>9. Datos de tus contactos</h2>
-<p>Las personas que dejan sus datos en tus anuncios son tus contactos y tú decides cómo los atiendes.</p>
-<p>Los formularios de Meta exigen una política de privacidad pública con tus datos como responsable. La preparo yo para ti y te la enseño antes de usarla; no tienes que hacer nada.</p>
-<p>El tratamiento de tus propios datos como cliente se rige por la <a href="../politica-privacidad.html">política de privacidad</a> de esta web.</p>
-
-<h2>10. Contacto</h2>
-<p>Rubén Candás · <a href="mailto:hola@rubencandas.com">hola@rubencandas.com</a> · WhatsApp <a href="https://wa.me/34664290852">664 290 852</a>.</p>
+    <div class="more">
+      <p><b>¿Alguna duda antes de darte de alta?</b> Escríbeme y lo vemos.</p>
+      <a href="https://wa.me/34664290852" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.24 8.24 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.46-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.99-1.23-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.29Z"/></svg>Escribir por WhatsApp</a>
+    </div>
+  </div>
 </main>
 
 <footer>
