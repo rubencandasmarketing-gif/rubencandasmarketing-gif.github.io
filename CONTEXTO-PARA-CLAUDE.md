@@ -48,3 +48,5 @@ clientes y la comunicacion por telefono/WhatsApp.
 - Instrucciones de grabacion del video (misma carpeta).
 - El repositorio de GitHub es publico: la rama `feat/tucampanalista-alta` no se
   ha subido para no revelar la carpeta. Hacer el repo privado antes de subirla.
+
+Decision (25-10-2026): los contactos de los anuncios NO se envian por email. Cada cliente los revisa a diario en Meta Business Suite. Por eso se quito del formulario la pregunta `recepcion_contactos`.
